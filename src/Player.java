@@ -15,6 +15,7 @@ public class Player
     private int theStatingDirection;
     private int score;
     private int color;
+    private boolean alive = true;
     
     
     /*
@@ -36,6 +37,7 @@ public class Player
         this.theStatingDirection = startingDirection;
         this.score = 0;
         this.color = color;
+        this.alive = true;
         aSnake = new Snake();
         
     }

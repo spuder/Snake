@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author Spencer Owen 
  * @version 1.0
  */
-public class Snake
+public class Snake 
 {
     // instance variables - replace the example below with your own
     private int length = 3;
@@ -74,17 +74,41 @@ public class Snake
     }
     
     /*
-     * // Move each body part forward one, If we hit an apple, then make us longer, if we hit anti apple, make us shorter
+     *  Move each body part forward one, If we hit an apple, then make us longer, if we hit anti apple, make us shorter
      */
     public void updateBodyPosition()
     {
         
     }
     
-    public void wallCollisionCheck()
+    /*
+     * If snake hits a wall, set alive to false 
+     */
+    public boolean wallCollisionCheck()
     {
+    	//If the mode has wall collisions , check
+        if ( Arena.solidWalls == true)
+        {
+        	if( currentHeadXPosition >= 0 &&  currentHeadXPosition <= Arena.xMaximum && 
+        		currentHeadYPosition >= 0 &&  currentHeadXPosition <= Arena.yMaximum &&
+        		currentHeadZPosition >= 0 &&  currentHeadZPosition <= Arena.zMaximum	)
+        	{
+        		//Player is inside all bounds
+        		return true;
+        		
+        	}
+        	else return false;
+        	
+        }
+        //If the walls are turned off
+        else 
+        {
+        	//If the walls are invisible, then we cant possibly die by hitting them now can we. 
+        	return true;
+        }
         
-    }
+        
+    }//end wallCollisionCheck()
     
     
     public void increaseSpeed()

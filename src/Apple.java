@@ -21,6 +21,7 @@ public class Apple
 
     //Every apple has a color, needed for multiplayer mode
     private int color;
+    
     /**
      * Constructor for objects of class Apple
      */

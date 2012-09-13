@@ -7,13 +7,13 @@ import java.util.ArrayList;
  */
 public class Game
 {
-    // instance variables - replace the example below with your own
+
     private int numberOfPlayers;
     private int cubeType;
     private int gameMode; 
     private boolean gamePaused;
     
-    private ArrayList aListOfPlayers;
+    private ArrayList<Player> aListOfPlayers;
 
     /**
      * Constructor for objects of class Game
@@ -26,12 +26,16 @@ public class Game
         this.gameMode = gameMode;
         this.gamePaused = true;
         
+        this.aListOfPlayers = new ArrayList<Player>();
+        
         for (int playerCounter = 0; playerCounter < numberOfPlayers; playerCounter++)
         {
             //Create new player objects,
             //addPlayer( int playerNumber, int startingLocation, int startingDirection, int color)
             addPlayer(playerCounter, 0, 0 , 0 );
         }
+        
+        
     }
 
 
