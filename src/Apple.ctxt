@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=xPosition\ yPosition\ zPosition\ color
+comment0.target=Apple(int,\ int,\ int,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Apple\n
+comment1.params=absolutePosition\ color
+comment1.target=Apple(int,\ int)
+comment2.params=
+comment2.target=int\ getAbsolutePosition()
+comment3.params=absolutePosition
+comment3.target=void\ setAbsolutePosition(int)
+numComments=4

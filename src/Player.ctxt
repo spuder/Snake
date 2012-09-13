@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.params=playerNumber\ startingLocation\ startingDirection\ color
+comment0.target=Player(int,\ int,\ int,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Player\n
+comment1.params=pointsToAdd
+comment1.target=void\ incrementScore(int)
+comment2.params=pointsToSubtract
+comment2.target=void\ decrementScore(int)
+numComments=3
