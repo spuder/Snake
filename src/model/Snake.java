@@ -16,7 +16,8 @@ public class Snake
     private int currentHeadYPosition;
     private int currentHeadZPosition;
     
-    private int currentHeadAbsolutePosition;
+    //This should be derived in the getter method
+//    private int currentHeadAbsolutePosition;
     
     /*
      * We need to know the next head position for the first levels where the snake moves very slowly, 
@@ -51,9 +52,8 @@ public class Snake
     {
        
         //Move snake forward one
-        //Check if we hit an apple
-        //Check if we hit a wall
-        //Check if we hit a snake body
+    	//Dont do any checking here. The checks should be done outside this class
+
         bodyCollisionCheck();
     }
     
@@ -74,12 +74,15 @@ public class Snake
         //If we hit an apple, add points and make length longer
     }
     
-    /*
-     *  Move each body part forward one, If we hit an apple, then make us longer, if we hit anti apple, make us shorter
-     */
+   
     public void updateBodyPosition()
     {
-        
+    	//No changing of the array list length should take place here, that will be handled outside this class
+    	//By definition java beans are only data storage classes with basic getters and setters
+    	
+    	//Push array[0] to array[1] ect...
+       //Take nextHeadPosition and set to array[0]
+       
     }
     
     /**
@@ -88,9 +91,14 @@ public class Snake
      * If the snake attempts to go past the wall and  Arena.isSolidWalls = true; the snake is dead
      * If Arena.isSolidWalls = false this method always returns false since the snake can 
      * never die from a wall collision in that situation.
+     * 
+     * A snake dies if the head position goes to -1 or greater than there are leds, either 8 or 16 for most cubes
+     * The cube is always assumed to be base 0. The first led in the cube is 0,0,0
      *
      *@return true
-     *@reutrn false
+     *@return false
+     *@see bodyCollisionCheck
+     *@see appleCheck
      */
     public boolean hasCollidedWithWall()
     {
@@ -102,6 +110,7 @@ public class Snake
         		currentHeadYPosition >= 0 &&  currentHeadXPosition <= Arena.yMaximum &&
         		currentHeadZPosition >= 0 &&  currentHeadZPosition <= Arena.zMaximum	)
         	{
+        		
         		//Player is inside all bounds
         		return false;
         		
@@ -120,12 +129,20 @@ public class Snake
         
     }//end wallCollisionCheck()
     
-    
+    /**
+     * Increases the speed of the snake by 1
+     * @see decreaseSpeed
+     */
     public void increaseSpeed()
     {
         this.speed++;
     }
     
+    /**
+     * Decreases the speed of the snake by 1
+     * The minimum value is 0 and can not go past that
+     * @see increaseSpeed
+     */
     public void decreaseSpeed()
     {
         //If speed is 0, don't decrease it any further
