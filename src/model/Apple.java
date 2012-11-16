@@ -20,7 +20,7 @@ public class Apple
     //Absolute position is derived from the x y z. 15,15,15 would be 4095, 0,1,0 would be 16
     private int absolutePosition;
 
-    //Every apple has a color, needed for multiplayer mode
+    //Every apple has a color, needed for multiplier mode
     private int color;
     
     /**
@@ -28,7 +28,7 @@ public class Apple
      */
     public Apple( int xPosition, int yPosition, int zPosition, int color )
     {
-        // initialise instance variables
+        // Initialize instance variables
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.zPosition = zPosition; 
@@ -38,9 +38,10 @@ public class Apple
     public Apple( int absolutePosition, int color )
     {
         // Take the absolute location and convert it to realtive
-        this.xPosition = absolutePosition * 0;
-        this.yPosition = absolutePosition * 0 * 16;
-        this.zPosition = absolutePosition * 0 * 16 * 16; 
+//        this.xPosition = absolutePosition * 0;
+//        this.yPosition = absolutePosition * 0 * 16;
+//        this.zPosition = absolutePosition * 0 * 16 * 16; 
+        this.absolutePosition = absolutePosition;
         this.color = color;
     }
 

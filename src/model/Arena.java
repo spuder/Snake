@@ -32,10 +32,18 @@ public  class Arena
     private  Arena() {}
 
     /*
-     * Method to create a new instance of an apple when an apple has been eaten or at begining of game
+     * Method to create a new instance of an apple when an apple has been eaten or at beginning of game
      */
     public static void createApple()
     {
+    	//TODO:Delete this test code
+    	model.Apple anApple = new model.Apple(10,255);
+    	model.Arena.aListOfApples.add(anApple);
+    	
+    	model.Apple anApple2 = new model.Apple(9,255);
+    	model.Arena.aListOfApples.add(anApple);
+    	
+    	
         //Generate a random number between 0 and the cube max (4095), 
         //If the position is not currently inside a snake or an obstacle
         //If the position is not directly in front of the user
