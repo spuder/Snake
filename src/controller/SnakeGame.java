@@ -1,17 +1,19 @@
 package controller;
 
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 
 import model.Arena;
 
 
 
 public class SnakeGame {
+	static Logger logger = Logger.getLogger(SnakeGame.class);
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
+		
 		// TODO Auto-generated method stub
 		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
@@ -19,9 +21,14 @@ public class SnakeGame {
 		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
 		
 		ArrayList<Integer> snake1Position = new ArrayList<Integer>();
+			logger.info("Created snake1Position");
 		snake1Position.add(13);
+			logger.info("added 13 to snake1Position arrayList");
 		snake1Position.add(14);
+			logger.info("added 14 to snake1Position arrayList");
 		snake1Position.add(15);
+			logger.info("added 15 to snake1Position arrayList");
+		
 		
 		ArrayList<Integer> snake2Position = new ArrayList<Integer>();
 		snake2Position.add(4093);
@@ -37,6 +44,7 @@ public class SnakeGame {
 //		Arena.createApple();
 		SnakeController aSnakeController = new SnakeController();
 		
+		logger.debug("Entering SnakeGame.while loop");
 		while(true)
 		{
 			

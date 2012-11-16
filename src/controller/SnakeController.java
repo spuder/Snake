@@ -92,17 +92,20 @@ public class SnakeController {
 		}
 		else
 		{
-			throw new IllegalStateException("advanceForward must receive a direction between 0 and 5, received: " + direction );
+			throw new IllegalStateException("SnakeController.advanceForward() must receive a direction between 0 and 5, received: " + direction );
 		}
 			
-			//Save new position to array after we convert it back
-			anArrayList.add( 0, ConvertLedType.relativeToAbsolute( headPositionX, headPositionY, headPositionZ ));
-			System.out.println("Snake is now at "+ anArrayList.get(0));
-			//Save new array to Snake Bean
-			aSnake.setBodyPositions( anArrayList );
-			//Mark the arrayList null so it will be cleaned up by the garbage collector
-			anArrayList = null;
-			
+		//Save new position to array after we convert it back
+		anArrayList.add( 0, ConvertLedType.relativeToAbsolute( headPositionX, headPositionY, headPositionZ ));
+		
+		System.out.println("Snake is now at "+ anArrayList.get(0));
+		
+		//Save new array to Snake Bean
+		aSnake.setBodyPositions( anArrayList );
+		
+		//Mark the arrayList null so it will be cleaned up by the garbage collector
+		anArrayList = null;
+		
 			
 		
 	}
@@ -117,8 +120,7 @@ public class SnakeController {
 		int numberOfApples = model.Arena.aListOfApples.size();
 		System.out.println("numberOfApples is now: "+ numberOfApples);
 		
-//		System.out.println("Apple Position is "+ model.Arena.aListOfApples.get(0).getAbsolutePosition() );
-		
+
 		for ( numberOfApples = model.Arena.aListOfApples.size() - 1; numberOfApples >=0; numberOfApples--)
 		{
 			if ( model.Arena.aListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
