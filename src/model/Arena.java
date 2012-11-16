@@ -25,10 +25,10 @@ public  class Arena
     
 
 
-	public static ArrayList<Apple> aListOfApples;
+	public static ArrayList<Apple> aListOfApples = new ArrayList<Apple>();
 //    public ArrayList<AntiApple> aListOfAntiApples;
 
-    //Since this is a singleton pattern, we make this method unaccessable on purpose
+    //Since this is a singleton pattern, we make this method unaccessible on purpose
     private  Arena() {}
 
     /*
@@ -38,7 +38,7 @@ public  class Arena
     {
         //Generate a random number between 0 and the cube max (4095), 
         //If the position is not currently inside a snake or an obstacle
-        //If the position is not directly infront of the user
+        //If the position is not directly in front of the user
             //Then create an apple
         //Apple aApple = new Apple();
         

@@ -15,6 +15,7 @@ public class Snake
 	private int color;
 	private int length;
 	private int speed;
+	private long lastMoveTime;
 	
 	/*Travel Direction
 	 * 0 = north
@@ -39,6 +40,7 @@ public class Snake
     	this.color = color;
     	this.length = 3;
     	this.speed = speed;
+    	this.lastMoveTime = System.currentTimeMillis();
     	this.travelDirection = travelDirection;
     	this.score = 0;
     	this.bodyPositions = bodyPositions;
@@ -53,6 +55,7 @@ public class Snake
     	this.color = ConvertLedType.hexToInt(color);
     	this.length = 3;
     	this.speed = speed;
+    	this.lastMoveTime = System.currentTimeMillis();
     	this.travelDirection = travelDirection;
     	this.score = 0;
     	this.bodyPositions = bodyPositions;
@@ -114,12 +117,12 @@ public class Snake
 		//TODO: Should not be any number except 0 - 5
 		/*
 		 * Travel Direction
-		 * 0 = north
-		 * 1 = east
-		 * 2 = south
-		 * 3 = west
-		 * 4 = up
-		 * 5 = down
+		 * 0 = north 	//z++
+		 * 1 = east 	//x++
+		 * 2 = south 	//z--
+		 * 3 = west 	//x--
+		 * 4 = up 		//y++
+		 * 5 = down 	//y--
 		 */
 		
 		/*
@@ -183,6 +186,14 @@ public class Snake
 		//TODO: if we try and set the state to a state we are already in, we should log it
 		
 		this.alive = alive;
+	}
+
+	public long getLastMoveTime() {
+		return lastMoveTime;
+	}
+
+	public void setLastMoveTime(long lastMoveTime) {
+		this.lastMoveTime = lastMoveTime;
 	}
 
 

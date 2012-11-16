@@ -33,7 +33,7 @@ public class Player
      */
     public Player(int playerNumber, int startingLocation, int startingDirection, int color)
     {
-        // initialise instance variables
+        // Initialize instance variables
         this.playerNumber = playerNumber;
         this.theStartingLocation = startingLocation;
         this.theStatingDirection = startingDirection;
