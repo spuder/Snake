@@ -1,6 +1,8 @@
 package model;
 import java.util.ArrayList; 
 
+import controller.ConvertLedType;
+
 /**
  * Snake has a position, speed, length
  * 
@@ -9,183 +11,184 @@ import java.util.ArrayList;
  */
 public class Snake 
 {
-    // instance variables - replace the example below with your own
-    private int length = 3;
-    private int speed;
-    private int currentHeadXPosition;
-    private int currentHeadYPosition;
-    private int currentHeadZPosition;
     
-    //This should be derived in the getter method
-//    private int currentHeadAbsolutePosition;
-    
-    /*
-     * We need to know the next head position for the first levels where the snake moves very slowly, 
-     * basically we need to buffer where the user wants to go for several milliseconds until the snake 
-     * actually moves. 
-     */
-    
-    private int nextHeadXPosition;
-    private int nextHeadYPosition;
-    private int nextHeadZPosition;
-    
-    private int nextHeadAbsolutePosition;
-    
-    /*Keep all the locations of where a snake is inside an array, Use arraylist because it is much 
-    * easier to append to the end, 
-    */
-    private ArrayList<Integer> snakeBodyPosition; 
-    
+	private int color;
+	private int length;
+	private int speed;
+	
+	/*Travel Direction
+	 * 0 = north
+	 * 1 = east
+	 * 2 = south
+	 * 3 = west
+	 * 4 = up
+	 * 5 = down
+	 */
+	private int travelDirection;
+	private int score;
+	private ArrayList<Integer> bodyPositions;
+	private boolean alive;
+
+
 
     /*
      * Constructor for objects of class Snake
      */
-    public Snake()
+    public Snake(int color, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
     {
-        snakeBodyPosition = new ArrayList<Integer>();
-    }
-
-    /*
-     * An iteration has occurred, move the snake forward one
-     */
-    public void advanceForward()
-    {
-       
-        //Move snake forward one
-    	//Dont do any checking here. The checks should be done outside this class
-
-        bodyCollisionCheck();
-    }
-    
-    /*
-     * See if we have hit any walls, out own body, other snakes or an apple / antiapple
-     */
-    public void bodyCollisionCheck()
-    {
+    	this.color = color;
+    	this.length = 3;
+    	this.speed = speed;
+    	this.travelDirection = travelDirection;
+    	this.score = 0;
+    	this.bodyPositions = bodyPositions;
+    	this.alive = true;
         
     }
-    
-    /*
-     * See if we have hit an apple, if the apple is my own color give points, if other color, give less points
-     * 
-     */
-    public void appleCheck()
+
+    public Snake(String color, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
     {
-        //If we hit an apple, add points and make length longer
-    }
-    
-   
-    public void updateBodyPosition()
-    {
-    	//No changing of the array list length should take place here, that will be handled outside this class
-    	//By definition java beans are only data storage classes with basic getters and setters
-    	
-    	//Push array[0] to array[1] ect...
-       //Take nextHeadPosition and set to array[0]
-       
-    }
-    
-    /**
-     * Returns whether the snake has collided with a wall
-     * Checks the Arena.isSolidWalls to see if wall collisions kill the snake
-     * If the snake attempts to go past the wall and  Arena.isSolidWalls = true; the snake is dead
-     * If Arena.isSolidWalls = false this method always returns false since the snake can 
-     * never die from a wall collision in that situation.
-     * 
-     * A snake dies if the head position goes to -1 or greater than there are leds, either 8 or 16 for most cubes
-     * The cube is always assumed to be base 0. The first led in the cube is 0,0,0
-     *
-     *@return true
-     *@return false
-     *@see bodyCollisionCheck
-     *@see appleCheck
-     */
-    public boolean hasCollidedWithWall()
-    {
-    	//Arena.getInstance();
-		//If the mode has wall collisions , check
-        if ( Arena.isSolidWalls() == true)
-        {
-        	if( currentHeadXPosition >= 0 &&  currentHeadXPosition <= Arena.xMaximum && 
-        		currentHeadYPosition >= 0 &&  currentHeadXPosition <= Arena.yMaximum &&
-        		currentHeadZPosition >= 0 &&  currentHeadZPosition <= Arena.zMaximum	)
-        	{
-        		
-        		//Player is inside all bounds
-        		return false;
-        		
-        	}
-        	//Player has attempted to go outside walls, player is dead
-        	else return true;
-        	
-        }
-        //If the walls are turned off
-        else 
-        {
-        	//If the walls are invisible, then we cant possibly die by hitting them now can we. 
-        	return false;
-        }
+    	//Allow user to pass in "FFFFFF" and then convert it to the number
+    	//integers are faster to compute than strings
+    	this.color = ConvertLedType.hexToInt(color);
+    	this.length = 3;
+    	this.speed = speed;
+    	this.travelDirection = travelDirection;
+    	this.score = 0;
+    	this.bodyPositions = bodyPositions;
+    	this.alive = true;
         
-        
-    }//end wallCollisionCheck()
-    
-    /**
-     * Increases the speed of the snake by 1
-     * @see decreaseSpeed
-     */
-    public void increaseSpeed()
-    {
-        this.speed++;
-    }
-    
-    /**
-     * Decreases the speed of the snake by 1
-     * The minimum value is 0 and can not go past that
-     * @see increaseSpeed
-     */
-    public void decreaseSpeed()
-    {
-        //If speed is 0, don't decrease it any further
-        if( this.speed > 0 )
-        {
-            this.speed--;
-        }
-    }
-    
-    public void increaseLength()
-    {
-        this.length++;
-    }
-    
-    public void decreaseLength()
-    {
-        if ( !( this.length <= 3)  )
-        { 
-            this.length--;
-        }
     }
 
-	public int getCurrentHeadXPosition() {
-		return currentHeadXPosition;
+
+	public int getColor() {
+		return color;
 	}
 
-	public void setCurrentHeadXPosition(int currentHeadXPosition) {
-		this.currentHeadXPosition = currentHeadXPosition;
+
+
+	public void setColor(int color) {
+		this.color = color;
+	}
+	
+	
+	public void setColor(String	 color) {
+		this.color = ConvertLedType.hexToInt(color);
+	}
+	
+
+
+	public int getLength() {
+		return length;
 	}
 
-	public int getCurrentHeadYPosition() {
-		return currentHeadYPosition;
+
+
+	public void setLength(int length) {
+		//TODO: This should not be negative, or greater than the number of leds per cube (4096) in our case;
+		this.length = length;
 	}
 
-	public void setCurrentHeadYPosition(int currentHeadYPosition) {
-		this.currentHeadYPosition = currentHeadYPosition;
+
+
+	public int getSpeed() {
+		return speed;
 	}
 
-	public int getCurrentHeadZPosition() {
-		return currentHeadZPosition;
+
+
+	public void setSpeed(int speed) {
+		//TODO:This should not be negative
+		this.speed = speed;
 	}
 
-	public void setCurrentHeadZPosition(int currentHeadZPosition) {
-		this.currentHeadZPosition = currentHeadZPosition;
+
+
+	public int getTravelDirection() {
+		return travelDirection;
 	}
+
+
+
+	public void setTravelDirection(int travelDirection) {
+		//TODO: Should not be any number except 0 - 5
+		/*
+		 * Travel Direction
+		 * 0 = north
+		 * 1 = east
+		 * 2 = south
+		 * 3 = west
+		 * 4 = up
+		 * 5 = down
+		 */
+		
+		/*
+		 * The user should not be able to set their direction to 180 degrees opposite
+		 * If they try to, ignore it, but add it to the logs
+		 * Example; Travel Direction = north, user can not set direction to south
+		 * Example; Travel Direction = west, user can not set direction to east
+		 */
+		this.travelDirection = travelDirection;
+	}
+
+
+
+	public int getScore() {
+		return score;
+	}
+
+
+
+	public void setScore(int score) {
+		//TODO: allow negative scores
+		//TODO: test that we are within 65,000 the maximum of Integer
+		
+		//Add the additional points to the existing score
+		this.score = this.score + score;
+	}
+
+
+
+	/**
+	 * Returns an arrayList of the positions of the snake
+	 * All positions are in absolute values and assume origin = 0 (not 1)
+	 * Example a snake 4 long might return -> bodyPositions[31,32,33,34]
+	 * @return
+	 */
+	public ArrayList<Integer> getBodyPositions() {
+		return bodyPositions;
+	}
+
+
+
+	public void setBodyPositions(ArrayList<Integer> bodyPositions) {
+		//TODO: non of the items should be negative
+		//Is is it really worth checking this? It would be expensive
+		this.bodyPositions = bodyPositions;
+	}
+
+
+	/**
+	 * Returns true if user is alive, false if user is dead
+	 * 
+	 * @return alive
+	 */
+	public boolean isAlive() {
+		return alive;
+	}
+
+
+
+	public void setAlive(boolean alive) {
+		//TODO: if we try and set the state to a state we are already in, we should log it
+		
+		this.alive = alive;
+	}
+
+
+
+    
+ 
+
+	
 }
