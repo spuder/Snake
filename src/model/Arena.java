@@ -26,8 +26,8 @@ public  class Arena
 
 
 	public static ArrayList<Apple> aListOfApples = new ArrayList<Apple>();
-//    public ArrayList<AntiApple> aListOfAntiApples;
-
+	public static ArrayList<Snake> aListOfSnakes = new ArrayList<Snake>();
+	
     //Since this is a singleton pattern, we make this method unaccessible on purpose
     private  Arena() {}
 

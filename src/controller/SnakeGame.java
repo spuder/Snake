@@ -1,6 +1,10 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -14,11 +18,44 @@ public class SnakeGame {
 
 	public static void main(String[] args) {
 		
-		// TODO Auto-generated method stub
+		
+		model.Game theGame = new model.Game();
 		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
 		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
 		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
+		
+		
+		String numberOfPlayers = JOptionPane.showInputDialog("Enter Number of Players");
+		int numberOfPlayersToInt = Integer.parseInt( numberOfPlayers );
+		
+		theGame.createSnakes(numberOfPlayersToInt);
+		
+		
+		
+		logger.debug("Entering SnakeGame.while loop");
+//		while(model.Game.isGamePaused() == false)
+//		{
+//			
+//			
+//			
+//
+//		}
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	/*
+	 * 		// TODO Create Game
+		model.Game aGame = new model.Game();
+		
+		
+		
 		
 		ArrayList<Integer> snake1Position = new ArrayList<Integer>();
 			logger.info("Created snake1Position");
@@ -44,11 +81,8 @@ public class SnakeGame {
 //		Arena.createApple();
 		SnakeController aSnakeController = new SnakeController();
 		
-		logger.debug("Entering SnakeGame.while loop");
-		while(true)
-		{
-			
-			//Check to see if it is time to take action
+		
+					//Check to see if it is time to take action
 			if ( aSnakeController.checkTimeout(aSnake) == true)
 			{
 				aSnakeController.advanceForward(aSnake);
@@ -65,12 +99,7 @@ public class SnakeGame {
 //					aSnakeController.wallCheck(aSnake2);
 //					aSnakeController.bodyCheck(aSnake2);
 			}
-		}
 		
-		
-		
-		
-		
-	}
+	 */
 
 }
