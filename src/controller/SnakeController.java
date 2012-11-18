@@ -59,6 +59,8 @@ public class SnakeController {
 		 * 5 = down 	//y--
 		 */
 		int direction = aSnake.getTravelDirection();
+		
+		
 		if( direction == 0)
 		{
 			//add 1 to z because we are moving north

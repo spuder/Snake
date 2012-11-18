@@ -19,7 +19,7 @@ public class SnakeGame {
 	public static void main(String[] args) {
 		
 		
-		model.Game theGame = new model.Game();
+		controller.GameController theGameController = new controller.GameController();
 		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
 		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
@@ -29,7 +29,8 @@ public class SnakeGame {
 		String numberOfPlayers = JOptionPane.showInputDialog("Enter Number of Players");
 		int numberOfPlayersToInt = Integer.parseInt( numberOfPlayers );
 		
-		theGame.createSnakes(numberOfPlayersToInt);
+		theGameController.createSnakes(numberOfPlayersToInt);
+		
 		
 		
 		
