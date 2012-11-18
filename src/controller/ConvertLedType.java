@@ -2,9 +2,14 @@ package controller;
 
 import java.util.Locale;
 
+import org.apache.log4j.Logger;
+
 import model.CubeAttributes;
 
 public class ConvertLedType {
+	//Create a new logger for this class
+	
+
 	/**
 	 * http://en.wikipedia.org/wiki/Singleton_pattern	
 	 * There are two common implementations, lazy and eager. This code represents eager 
@@ -13,7 +18,6 @@ public class ConvertLedType {
 	//private static final ConvertLedType instance = new ConvertLedType();
 	
 	private ConvertLedType(){throw new IllegalStateException("The constructor of ConvertLedType was called, should not have been possible");}
-	
 	/*There should not ever be an instance of this class since it is a utility class
 //		public static ConvertLedType getInstance()
 //		{
@@ -187,7 +191,10 @@ public class ConvertLedType {
 	public static int hexToInt(String color)
 	{
 		if (color.length() > 6)
+		{
 			color.substring(color.length() - 6);
+		}
+			
 		
 		return Integer.parseInt(color, 16);
 	}

@@ -46,6 +46,8 @@ public class ArenaControllerTest {
 		
 		//Create an apple with color 255
 		theArenaController.createApple(255);
+		
+		//This test relies on the System.out.println to show what is happening
 	}
 
 

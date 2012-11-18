@@ -1,6 +1,8 @@
 package model;
 import java.util.ArrayList; 
 
+import org.apache.log4j.Logger;
+
 import controller.ConvertLedType;
 
 /**
@@ -11,6 +13,7 @@ import controller.ConvertLedType;
  */
 public class Snake 
 {
+	public Logger logger = Logger.getLogger(this.getClass() );
     
 	private int color;
 	private int length;
@@ -37,6 +40,7 @@ public class Snake
      */
     public Snake(int color, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
     {
+    	logger.info("Creating a Snake, color=" + color + " travelDirection=" + travelDirection );
     	this.color = color;
     	this.length = 3;
     	this.speed = speed;

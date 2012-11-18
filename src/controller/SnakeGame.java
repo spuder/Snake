@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -14,12 +15,17 @@ import model.Arena;
 
 
 public class SnakeGame {
-	static Logger logger = Logger.getLogger(SnakeGame.class);
+	//Create a log4j instance
+	public static Logger logger = Logger.getLogger(SnakeGame.class);
+
 
 	public static void main(String[] args) {
-		
+		//Setup log4j
+		BasicConfigurator.configure();
 		
 		controller.GameController theGameController = new controller.GameController();
+		
+
 		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
 		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
@@ -34,7 +40,7 @@ public class SnakeGame {
 		
 		
 		
-		logger.debug("Entering SnakeGame.while loop");
+		logger.info("Entering SnakeGame.while loop");
 //		while(model.Game.isGamePaused() == false)
 //		{
 //			
@@ -47,7 +53,23 @@ public class SnakeGame {
 		
 		
 		
+	}// end main
+	
+	public static void setupGame()
+	{
+		
 	}
+	
+	public static void startGame()
+	{
+		
+	}
+	
+	public static void showScores()
+	{
+		
+	}
+
 	
 	
 	
