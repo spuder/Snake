@@ -40,6 +40,7 @@ public class Snake
      */
     public Snake(int color, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
     {
+    	logger.debug("Calling snake constructor with color = int (instead of string)" );
     	logger.info("Creating a Snake, color=" + color + " travelDirection=" + travelDirection );
     	this.color = color;
     	this.length = 3;
@@ -54,6 +55,9 @@ public class Snake
 
     public Snake(String color, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
     {
+    	logger.debug("Calling snake constructor with color = string (instead of int)" );
+    	logger.info("Creating a Snake, color=" + color + " travelDirection=" + travelDirection );
+    	
     	//Allow user to pass in "FFFFFF" and then convert it to the number
     	//integers are faster to compute than strings
     	this.color = ConvertLedType.hexToInt(color);
@@ -136,6 +140,7 @@ public class Snake
 		 * Example; Travel Direction = west, user can not set direction to east
 		 */
 		this.travelDirection = travelDirection;
+		logger.debug("TravelDirection set to " + travelDirection);
 	}
 
 

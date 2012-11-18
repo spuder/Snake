@@ -11,6 +11,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 
 import model.Arena;
+import model.Snake;
 
 
 
@@ -21,26 +22,40 @@ public class SnakeGame {
 
 	public static void main(String[] args) {
 		//Setup log4j
-		BasicConfigurator.configure();
+		//BasicConfigurator.configure();
 		
 		controller.GameController theGameController = new controller.GameController();
-		
+		controller.ArenaController theArenaController = new controller.ArenaController();
 
 		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
 		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
 		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
+		model.Arena.xMaximum = 15;
+		model.Arena.yMaximum = 15;
+		model.Arena.zMaximum = 15;
 		
 		
 		String numberOfPlayers = JOptionPane.showInputDialog("Enter Number of Players");
 		int numberOfPlayersToInt = Integer.parseInt( numberOfPlayers );
 		
+		logger.info("Creating " + numberOfPlayers + " snakes");
 		theGameController.createSnakes(numberOfPlayersToInt);
 		
+		logger.info("Creating " + numberOfPlayers + " apples");
+		for (Snake aSnake : Arena.aListOfSnakes)
+		{
+			int snakeColor = aSnake.getColor();
+			theArenaController.createApple(snakeColor);
+			logger.debug("Creating Apple with color " + snakeColor);
+			
+		}
 		
 		
 		
-		logger.info("Entering SnakeGame.while loop");
+		
+		
+		logger.debug("Entering SnakeGame.while loop");
 //		while(model.Game.isGamePaused() == false)
 //		{
 //			

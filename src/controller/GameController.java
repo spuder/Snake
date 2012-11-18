@@ -2,8 +2,12 @@ package controller;
 
 import java.util.ArrayList;
 
-public class GameController {
+import org.apache.log4j.Logger;
 
+public class GameController {
+		Logger logger =  Logger.getLogger( this.getClass() );
+		
+		
 	model.Game aGame;
 	
 	public GameController()
@@ -21,6 +25,7 @@ public class GameController {
 		   
 		   if (NumberOfSnakesToCreate >= 1)
 		   {
+			   logger.info("Creating snake #1 of " + NumberOfSnakesToCreate);
 			   //Create 4 snake objects, the 4 players are hard coded
 			   int playerOneColor = controller.ConvertLedType.hexToInt("0000FF");
 			   int playerOneDirection = 3; //Snake is traveling west
@@ -32,11 +37,12 @@ public class GameController {
 			   
 			   aReusableSnake = new model.Snake(playerOneColor, playerOneDirection, playerOneBodyPositions, playerOneSpeed);
 			   model.Arena.aListOfSnakes.add(aReusableSnake);
-			   System.out.println("Made snake 1");
+			  
 		   }	
 		   
 		   if (NumberOfSnakesToCreate >= 2)
 		   {
+			   logger.info("Creating snake #4 of " + NumberOfSnakesToCreate);=
 			   //Create 4 snake objects, the 4 players are hard coded
 			   int playerTwoColor = controller.ConvertLedType.hexToInt("00FF00");
 			   int playerTwoDirection = 0; //Snake is traveling north
@@ -47,11 +53,12 @@ public class GameController {
 			   int playerTwoSpeed = 750;
 			   aReusableSnake = new model.Snake(playerTwoColor, playerTwoDirection, playerTwoBodyPositions, playerTwoSpeed);
 			   model.Arena.aListOfSnakes.add(aReusableSnake);
-			   System.out.println("Made snake 2");
+		
 		   }
 		   
 		   if (NumberOfSnakesToCreate >= 3)
 		   {
+			   logger.info("Creating snake #3 of " + NumberOfSnakesToCreate);
 			   //Create 4 snake objects, the 4 players are hard coded
 			   int playerThreeColor = controller.ConvertLedType.hexToInt("FF00FF");
 			   int playerThreeDirection = 0; //Snake is traveling north
@@ -62,11 +69,12 @@ public class GameController {
 			   int playerThreeSpeed = 750;
 			   aReusableSnake = new model.Snake(playerThreeColor, playerThreeDirection, playerThreeBodyPositions, playerThreeSpeed);
 			   model.Arena.aListOfSnakes.add(aReusableSnake);
-			   System.out.println("Made snake 3");
+			   
 		   }
 		   
 		   if (NumberOfSnakesToCreate == 4)
 		   {
+			   logger.info("Creating snake #4 of " + NumberOfSnakesToCreate);
 			   //Create 4 snake objects, the 4 players are hard coded
 			   int playerFourColor = controller.ConvertLedType.hexToInt("FF0000");
 			   int playerFourDirection = 0; //Snake is traveling north
@@ -77,7 +85,7 @@ public class GameController {
 			   int playerFourSpeed = 750;
 			   aReusableSnake = new model.Snake(playerFourColor, playerFourDirection, playerFourBodyPositions, playerFourSpeed);
 			   model.Arena.aListOfSnakes.add(aReusableSnake);
-			   System.out.println("Made snake 4");
+			  
 		   }
 		   
 		   if( NumberOfSnakesToCreate <1 || NumberOfSnakesToCreate >4)
