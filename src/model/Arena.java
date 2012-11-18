@@ -1,6 +1,5 @@
 package model;
-import java.util.ArrayList; 
-import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * Write a description of class Arena here.
@@ -27,8 +26,6 @@ public  class Arena
     public int numberOfLedsInCube;
     
     public static boolean solidWalls = false;
-    
-
 
 	public static ArrayList<Apple> aListOfApples = new ArrayList<Apple>();
 	public static ArrayList<Snake> aListOfSnakes = new ArrayList<Snake>();

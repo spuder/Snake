@@ -35,9 +35,9 @@ public class ArenaControllerTest {
 	public void createAppleTest()
 	{
 
-		model.Arena.xMaximum = 3;
-		model.Arena.yMaximum = 3;
-		model.Arena.zMaximum = 3;
+		model.Arena.xMaximum = 15;
+		model.Arena.yMaximum = 15;
+		model.Arena.zMaximum = 15;
 
 		ArenaController theArenaController = new ArenaController();
 		GameController theGameController = new GameController();
