@@ -42,7 +42,7 @@ public class GameController {
 		   
 		   if (NumberOfSnakesToCreate >= 2)
 		   {
-			   logger.info("Creating snake #4 of " + NumberOfSnakesToCreate);=
+			   logger.info("Creating snake #4 of " + NumberOfSnakesToCreate);
 			   //Create 4 snake objects, the 4 players are hard coded
 			   int playerTwoColor = controller.ConvertLedType.hexToInt("00FF00");
 			   int playerTwoDirection = 0; //Snake is traveling north
