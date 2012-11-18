@@ -1,6 +1,6 @@
 package model;
 
-import controller.ConvertLedType;
+//import controller.ConvertLedType;
 
 public class CubeAttributes {
 

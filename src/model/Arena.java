@@ -23,6 +23,9 @@ public  class Arena
     public static int yMaximum;
     public static int zMaximum;
     
+    //Never actually set, but makes it easy to create a getter. 
+    public int numberOfLedsInCube;
+    
     public static boolean solidWalls = false;
     
 
@@ -46,5 +49,13 @@ public  class Arena
 		Arena.solidWalls = solidWalls;
 	}
     
+	/**
+	 * @return Returns the highest LEDs in the arena
+	 * Result is given in base 0
+	 */
+	public static int getMaximumLedInCube()
+	{
+		return  controller.ConvertLedType.totalNumberOfLedsPerCube(xMaximum +1 , yMaximum +1 , zMaximum +1 ) -1;
+	}
     
 }

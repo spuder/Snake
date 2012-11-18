@@ -3,6 +3,8 @@ package controller;
 import java.util.Random;
 
 import model.Apple;
+import model.Arena;
+import model.CubeAttributes;
 import model.Snake;
 
 public class ArenaController {
@@ -24,11 +26,14 @@ public class ArenaController {
 	    	
 	    	int temporaryAppleLocation;
 	    	int minumumLed = 0;
-	    	int maximumLed = controller.ConvertLedType.relativeToAbsolute(xMaximum, yMaximum, zMaximum);
+//	    	//Get the highest number in the Arena and generate a random number less than it
+	    	int maximumLed = Arena.getMaximumLedInCube();
+	    	System.out.println("Maximum led = " + maximumLed + ", Arena.xMaximum="+ Arena.xMaximum +", Arena.yMaximum="+ Arena.yMaximum + ", Arena.zMaximum="+ Arena.zMaximum);
 	    	
 	    	//Create a random number between 0 and the maximum number of LEDs
 	    	Random aRandomNumber = new Random();
 	    	temporaryAppleLocation = aRandomNumber.nextInt(maximumLed - minumumLed) + minumumLed;
+//	    	temporaryAppleLocation = aRandomNumber.nextInt(maximumLed ) ;
 	        System.out.println("Created a random apple at " +  temporaryAppleLocation);
 	        
 	        
@@ -42,7 +47,7 @@ public class ArenaController {
 	        	appleCollisionCheck = true;
 	        	
 	        	//Look at every other apple in the arena and see if it is a duplicate 
-	        	for( Apple otherApples : aListOfApples )
+	        	for( Apple otherApples : model.Arena.aListOfApples )
 	        	{
 	        		//If 
 	        		if(temporaryAppleLocation == otherApples.getAbsolutePosition() )
@@ -55,7 +60,7 @@ public class ArenaController {
 	        	//Assume the snake is good unless we find a bad one
 	        	snakeCollisionCheck = true;
 	        	
-	        	for( Snake otherSnakes : aListOfSnakes )
+	        	for( Snake otherSnakes : model.Arena.aListOfSnakes )
 	        	{
 	        		for(Integer bodyPositionsToCheck : otherSnakes.getBodyPositions())
 	        		{
@@ -71,8 +76,10 @@ public class ArenaController {
 	        	
 	        	if (appleCollisionCheck == false || snakeCollisionCheck == false)
 	        	{
-	        		System.out.println("Creating a new Apple since there was a collision");
-	        		temporaryAppleLocation = aRandomNumber.nextInt(maximumLed - minumumLed) + minumumLed;
+	        		System.out.println("Creating a new Apple since there was a collision at: " + temporaryAppleLocation);
+//	        		temporaryAppleLocation = aRandomNumber.nextInt(maximumLed - minumumLed) + minumumLed;
+	        		temporaryAppleLocation = aRandomNumber.nextInt( maximumLed );
+
 	        		
 	        		//Since we had a collision, reset both of the checks to false
 	        		appleCollisionCheck = false;
@@ -83,8 +90,8 @@ public class ArenaController {
 	        }while ( appleCollisionCheck == false && snakeCollisionCheck == false);
 	        
 	        Apple anApple = new Apple(temporaryAppleLocation, appleColor);
-	        System.out.println("Added a new apple with color:  " + appleColor + temporaryAppleLocation);
-	        aListOfApples.add(anApple);
+	        System.out.println("Added a new apple with color:  " + appleColor + " at location: " + temporaryAppleLocation);
+	        model.Arena.aListOfApples.add(anApple);
 
 	        
 	    }

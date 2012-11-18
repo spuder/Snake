@@ -22,6 +22,9 @@ public class ArenaControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
+		model.CubeAttributes.xNumberOfLedsPerRow = 16;
+		model.CubeAttributes.yNumberOfRowsPerPanel = 16;
+		model.CubeAttributes.zNumberOfPanelsPerCube = 16;
 	}
 
 	@After
@@ -31,9 +34,18 @@ public class ArenaControllerTest {
 	@Test
 	public void createAppleTest()
 	{
-		Arena.xMaximum = 16;
+
+		model.Arena.xMaximum = 3;
+		model.Arena.yMaximum = 3;
+		model.Arena.zMaximum = 3;
+
+		ArenaController theArenaController = new ArenaController();
+		GameController theGameController = new GameController();
+		
+		theGameController.createSnakes(4);
+		
 		//Create an apple with color 255
-		Arena.createApple(255);
+		theArenaController.createApple(255);
 	}
 
 

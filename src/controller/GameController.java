@@ -13,12 +13,7 @@ public class GameController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
+
 	
 	   public void createSnakes(int NumberOfSnakesToCreate)
 	   {

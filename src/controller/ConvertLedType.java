@@ -192,5 +192,19 @@ public class ConvertLedType {
 		return Integer.parseInt(color, 16);
 	}
 	
+	/**Takes the number of leds per x y z and returns how many leds are in the cube
+	 * It basically does x*y*z however it can ignore a 0. 
+	 * 
+	 */
+	public static int totalNumberOfLedsPerCube(int xNumberOfLedsPerRow, int yNumberOfRowsPerPanel, int zNumberOfPanelsPerCube)
+	{
+		// This is derived (x*y*z) allowing for 0's 
+		int numberOfLedsPerCube = xNumberOfLedsPerRow * yNumberOfRowsPerPanel;
+		if ( zNumberOfPanelsPerCube > 0)
+		{
+			numberOfLedsPerCube = numberOfLedsPerCube * zNumberOfPanelsPerCube;
+		}
+		return numberOfLedsPerCube;
+	}
 
 }
