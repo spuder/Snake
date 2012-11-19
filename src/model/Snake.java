@@ -250,12 +250,14 @@ public class Snake
 		else if(direction == 4)
 		{
 			//add 1 to y because we are moving up
+			logger.debug("snake direction = down, (5 should = " + direction +" Incrementing Head position (y) by 1");
 			headPositionY++;
 		}
 		else if(direction == 5)
 		{
 			//subtract 1 from y because we are moving down
-			headPositionY++;
+			logger.debug("snake direction = down, (5 should = " + direction +" Decrementing Head position (y) by 1");
+			headPositionY--;
 
 		}
 		else
