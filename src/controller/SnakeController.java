@@ -40,77 +40,7 @@ public class SnakeController {
 			
 	}
 	
-	public void advanceForward(model.Snake aSnake)
-	{
-		//TODO: Logic to shift arrayList
-		ArrayList<Integer> anArrayList = aSnake.getBodyPositions();
-		int headPosition = anArrayList.get(0);
-		int headPositionX = controller.ConvertLedType.absoluteToXPositionInRow(headPosition);
-		int headPositionY = controller.ConvertLedType.absoluteToYPositionInPanel(headPosition);
-		int headPositionZ = controller.ConvertLedType.absoluteToZPositionInCube(headPosition);
-		
-		/*
-		 * Travel Direction
-		 * 0 = north 	//z++
-		 * 1 = east 	//x++
-		 * 2 = south 	//z--
-		 * 3 = west 	//x--
-		 * 4 = up 		//y++
-		 * 5 = down 	//y--
-		 */
-		int direction = aSnake.getTravelDirection();
-		
-		
-		if( direction == 0)
-		{
-			//add 1 to z because we are moving north
-			headPositionZ++;
-		}
-		else if(direction == 1)
-		{
-			//add 1 to x because we are moving east
-			headPositionX++;
-		}
-		else if(direction == 2)
-		{
-			//subtract 1 from z because we are moving south
-			headPositionZ--;
-		}
-		else if(direction == 3)
-		{
-			//subtract 1 from x because we are moving west
-			headPositionX--;
-		}
-		else if(direction == 4)
-		{
-			//add 1 to y because we are moving up
-			headPositionY++;
-		}
-		else if(direction == 5)
-		{
-			//subtract 1 from y because we are moving down
-			headPositionY++;
-
-		}
-		else
-		{
-			throw new IllegalStateException("SnakeController.advanceForward() must receive a direction between 0 and 5, received: " + direction );
-		}
-			
-		//Save new position to array after we convert it back
-		anArrayList.add( 0, ConvertLedType.relativeToAbsolute( headPositionX, headPositionY, headPositionZ ));
-		
-		System.out.println("Snake is now at "+ anArrayList.get(0));
-		
-		//Save new array to Snake Bean
-		aSnake.setBodyPositions( anArrayList );
-		
-		//Mark the arrayList null so it will be cleaned up by the garbage collector
-		anArrayList = null;
-		
-			
-		
-	}
+	
 	
 	public void appleCheck(model.Snake aSnake)
 	{
