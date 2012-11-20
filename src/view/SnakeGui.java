@@ -1,34 +1,64 @@
 package view;
 
+
+
+import java.awt.HeadlessException;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+
 /**
  * Write a description of class SnakeGui here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class SnakeGui
+@SuppressWarnings("serial")
+public class SnakeGui extends JFrame 
 {
-    // instance variables - replace the example below with your own
-    private int x;
 
-    /**
-     * Constructor for objects of class SnakeGui
-     */
-    public SnakeGui()
-    {
-        // initialise instance variables
-        x = 0;
-    }
+		public static final int MAIN_HEIGHT = 515;
+	    public static final int MAIN_WIDTH = 800;
+		
+	    private JMenuBar menuBar = new JMenuBar();
+	    private JMenu file = new JMenu("File");
+	    private JMenu crawl = new JMenu("Crawl");
+	    private JMenu help = new JMenu("Help");
+	    
+	    //Not sure what this code does, but skyler has it in his project
+	    public static SnakeGui GUI;
+	    private SnakeGui self;
+	    
+		public SnakeGui() throws HeadlessException 
+		{
+			//Not sure what this code does, but skyler has it in his project
+			self = this;
+			SnakeGui.GUI = this;
+	    	
+			this.setTitle("Snake");
+	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+	        
+	        buildMenu();
+	        
+	        this.setLocationRelativeTo(null);
+	        this.setVisible(true);
+			
+			
+		}
+		
+		public void buildMenu()
+		{
+			menuBar.add(file);
+	    	menuBar.add(crawl);
+	    	menuBar.add(help);
+	    	
+	    	  //Turn on the menuBar
+	          this.setJMenuBar(menuBar);
+		}
+	    
+	    
+		
+
 }

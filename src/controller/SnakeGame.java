@@ -16,7 +16,8 @@ public class SnakeGame {
 
 
 	public static void main(String[] args) {
-
+		view.SnakeGui theGui = new view.SnakeGui();
+		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
 		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
 		model.CubeAttributes.setzNumberOfPanelsPerCube(16);

@@ -250,6 +250,7 @@ public void createApple(int appleColor)
      
  }
    
+
  /**
   * Returns whether the snake has collided with a wall
   * Checks the Arena.isSolidWalls to see if wall collisions kill the snake
@@ -264,7 +265,8 @@ public void createApple(int appleColor)
   *@return false
   *@see bodyCollisionCheck
   *@see appleCheck
-  */
+  */ 
+ /*
  public boolean hasCollidedWithWall()
  {
  	//Arena.getInstance();
@@ -293,7 +295,7 @@ public void createApple(int appleColor)
      
      
  }//end wallCollisionCheck()
-
+*/
 	
 	public boolean checkTimeout(model.Snake aSnake)
 	{
