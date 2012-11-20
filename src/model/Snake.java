@@ -121,16 +121,27 @@ public class Snake extends Game
 
 
 
+	/**
+	 * Sets the travel direction of the snake based on this table
+	 * 0 = north 	//z++
+	 * 1 = east 	//x++
+	 * 2 = south 	//z--
+	 * 3 = west 	//x--
+	 * 4 = up 		//y++
+	 * 5 = down 	//y--
+	 * 
+	 * The perspective is always from the front of the cube (0,0,0) 
+	 * North is the back (*,15,*)
+	 * South is the front
+	 * East is the right
+	 * ect...
+	 *  
+	 *  
+	 */
 	public void setTravelDirection(int travelDirection) {
 		//TODO: Should not be any number except 0 - 5
 		/*
-		 * Travel Direction
-		 * 0 = north 	//z++
-		 * 1 = east 	//x++
-		 * 2 = south 	//z--
-		 * 3 = west 	//x--
-		 * 4 = up 		//y++
-		 * 5 = down 	//y--
+
 		 */
 		
 		/*
@@ -145,18 +156,28 @@ public class Snake extends Game
 
 
 
+	/**
+	 * Returns the score of the player as an Integer
+	 * Negative points are allowed
+	 * 
+	 * @return the score of the player 
+	 */
 	public int getScore() {
 		return score;
 	}
 
 
 
-	public void setScore(int score) {
-		//TODO: allow negative scores
-		//TODO: test that we are within 65,000 the maximum of Integer
-		
+	/**
+	 * Takes the parameter "pointsToAdd" and adds them to the current score
+	 * Negative points are allowed
+	 * 
+	 * @param pointsToAdd
+	 */
+	public void setScore(int pointsToAdd) {
+
 		//Add the additional points to the existing score
-		this.score = this.score + score;
+		this.score = this.score + pointsToAdd;
 	}
 
 
@@ -208,7 +229,6 @@ public class Snake extends Game
 
 	public void advanceForward()
 	{
-		//TODO: Logic to shift arrayList
 		ArrayList<Integer> anArrayList = this.getBodyPositions();
 		int headPosition = anArrayList.get(0);
 		int headPositionX = controller.ConvertLedType.absoluteToXPositionInRow(headPosition);
@@ -268,15 +288,16 @@ public class Snake extends Game
 		//Save new position to array after we convert it back
 		anArrayList.add( 0, ConvertLedType.relativeToAbsolute( headPositionX, headPositionY, headPositionZ ));
 		
-		System.out.println("Snake is now at "+ anArrayList.get(0));
+		logger.debug("Snake is now at "+ anArrayList.get(0));
 		
-		//Save new array to Snake Bean
+		//Save new array to Snake Object
 		this.setBodyPositions( anArrayList );
 		
 		//Mark the arrayList null so it will be cleaned up by the garbage collector
 		anArrayList = null;
 		
-			
+		//Update the time the snake was moved
+			this.lastMoveTime = System.currentTimeMillis();
 		
 	}
 	
@@ -297,9 +318,11 @@ public class Snake extends Game
 			if ( aListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
 			{
 				logger.error("Cannot create an apple where another apple already exists, statistically this happens once every 4095 apples");
+				
 				//Check to see if we got our own apple or someone else's
 				if(aListOfApples.get(numberOfApples).getColor() != this.getColor() )
 				{
+					logger.info("Snake "+ this.getColor() + " hit the apple " + aListOfApples.get(numberOfApples).getColor() +" which belongs to someone else");
 					//Add 100 points to the score;
 					this.setScore(100);
 					
@@ -309,10 +332,7 @@ public class Snake extends Game
 				
 				
 					//TODO:Delete the Apple
-				
-				
-				
-				
+	
 			}
 			else
 			{
@@ -322,12 +342,11 @@ public class Snake extends Game
 			System.out.println("" );
 		}
 		
-		
-				
-	}
+	}// end appleCheck
+	
 	
     
  
 
 	
-}
+}//end class Snake
