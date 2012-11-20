@@ -1,16 +1,10 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JOptionPane;
-
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-
-
-
 import model.CubeAttributes;
 import model.Snake;
 
@@ -22,13 +16,7 @@ public class SnakeGame {
 
 
 	public static void main(String[] args) {
-		//Setup log4j
-		//BasicConfigurator.configure();
-		
-//		controller.GameController theGameController = new controller.GameController();
-//		controller.ArenaController theArenaController = new controller.ArenaController();
 
-		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
 		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
 		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
