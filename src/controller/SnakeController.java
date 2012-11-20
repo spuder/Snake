@@ -2,7 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
-import model.Arena;
+
 
 public class SnakeController {
 
@@ -42,50 +42,7 @@ public class SnakeController {
 	
 	
 	
-	public void appleCheck(model.Snake aSnake)
-	{
-		ArrayList<Integer> anArray = aSnake.getBodyPositions();
-		
-		int headPosition = anArray.get(0);
-		System.out.println("headposition is " + headPosition);
-		
-		int numberOfApples = model.Arena.aListOfApples.size();
-		System.out.println("numberOfApples is now: "+ numberOfApples);
-		
-
-		for ( numberOfApples = model.Arena.aListOfApples.size() - 1; numberOfApples >=0; numberOfApples--)
-		{
-			if ( model.Arena.aListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
-			{
-				System.out.println("We have hit an apple!!!!!!!!");
-				//Check to see if we got our own apple or someone else's
-				if(model.Arena.aListOfApples.get(numberOfApples).getColor() != aSnake.getColor() )
-				{
-					//Add 100 points to the score;
-					aSnake.setScore(100);
-					
-				}
-				else 
-					aSnake.setScore(200);
-				
-				
-					//TODO:Delete the Apple
-				
-				
-				
-				
-			}
-			else
-			{
-				System.out.println("Didn't find an apple here");
-			}
-			System.out.println("We have finished evaluating stuff");
-			System.out.println("" );
-		}
-		
-		
-				
-	}
+	
 	
 	
 	 /**

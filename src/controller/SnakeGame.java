@@ -10,7 +10,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 
-import model.Arena;
+
+import model.CubeAttributes;
 import model.Snake;
 
 
@@ -25,16 +26,21 @@ public class SnakeGame {
 		//BasicConfigurator.configure();
 		
 		controller.GameController theGameController = new controller.GameController();
-		controller.ArenaController theArenaController = new controller.ArenaController();
+//		controller.ArenaController theArenaController = new controller.ArenaController();
 
 		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
 		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
 		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
-		model.Arena.xMaximum = 15;
-		model.Arena.yMaximum = 15;
-		model.Arena.zMaximum = 15;
+		CubeAttributes.xNumberOfLedsPerRow = 16;
+		CubeAttributes.yNumberOfRowsPerPanel = 16;
+		CubeAttributes.zNumberOfPanelsPerCube = 16;
 		
+//		model.Arena.xMaximum = 15;
+//		model.Arena.yMaximum = 15;
+//		model.Arena.zMaximum = 15;
+		
+		model.Game aGame = new model.Game();
 		
 		String numberOfPlayers = JOptionPane.showInputDialog("Enter Number of Players");
 		int numberOfPlayersToInt = Integer.parseInt( numberOfPlayers );
@@ -43,10 +49,10 @@ public class SnakeGame {
 		theGameController.createSnakes(numberOfPlayersToInt);
 		
 		logger.info("Creating " + numberOfPlayers + " apples");
-		for (Snake aSnake : Arena.aListOfSnakes)
+		for (Snake aSnake : aGame.getaListOfSnakes())
 		{
 			int snakeColor = aSnake.getColor();
-			theArenaController.createApple(snakeColor);
+			theGameController.createApple(snakeColor);
 			logger.debug("Creating Apple with color " + snakeColor);
 			
 		}
