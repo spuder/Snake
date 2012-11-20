@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList; 
 import java.util.Random;
+
+import org.apache.log4j.Logger;
 /**
  * Game has a mode, a paused status, number of players and cube type
  * 
@@ -10,7 +12,8 @@ import java.util.Random;
  */
 public class Game
 {
-
+	public Logger logger = Logger.getLogger(this.getClass() );
+    
     private int numberOfPlayers;
     private int cubeType;
     private int gameMode; 
@@ -88,13 +91,14 @@ public void createSnakes(int NumberOfSnakesToCreate)
 		   int playerOneSpeed = 750;
 		   
 		   aReusableSnake = new model.Snake(playerOneColor, playerOneDirection, playerOneBodyPositions, playerOneSpeed);
-		   model.Arena.aListOfSnakes.add(aReusableSnake);
+		   //No real need to specify this. but I like verbosity in code
+		   this.aListOfSnakes.add(aReusableSnake);
 		  
 	   }	
 	   
 	   if (NumberOfSnakesToCreate >= 2)
 	   {
-		   logger.info("Creating snake #4 of " + NumberOfSnakesToCreate);
+		   logger.info("Creating snake #2 of " + NumberOfSnakesToCreate);
 		   //Create 4 snake objects, the 4 players are hard coded
 		   int playerTwoColor = controller.ConvertLedType.hexToInt("00FF00");
 		   int playerTwoDirection = 0; //Snake is traveling north
@@ -104,7 +108,7 @@ public void createSnakes(int NumberOfSnakesToCreate)
 		   playerTwoBodyPositions.add(0);
 		   int playerTwoSpeed = 750;
 		   aReusableSnake = new model.Snake(playerTwoColor, playerTwoDirection, playerTwoBodyPositions, playerTwoSpeed);
-		   model.Arena.aListOfSnakes.add(aReusableSnake);
+		   this.aListOfSnakes.add(aReusableSnake);
 	
 	   }
 	   
@@ -120,7 +124,7 @@ public void createSnakes(int NumberOfSnakesToCreate)
 		   playerThreeBodyPositions.add(3842);
 		   int playerThreeSpeed = 750;
 		   aReusableSnake = new model.Snake(playerThreeColor, playerThreeDirection, playerThreeBodyPositions, playerThreeSpeed);
-		   model.Arena.aListOfSnakes.add(aReusableSnake);
+		   this.aListOfSnakes.add(aReusableSnake);
 		   
 	   }
 	   
@@ -135,8 +139,9 @@ public void createSnakes(int NumberOfSnakesToCreate)
 		   playerFourBodyPositions.add(3601);
 		   playerFourBodyPositions.add(3346);
 		   int playerFourSpeed = 750;
+		   
 		   aReusableSnake = new model.Snake(playerFourColor, playerFourDirection, playerFourBodyPositions, playerFourSpeed);
-		   model.Arena.aListOfSnakes.add(aReusableSnake);
+		   this.aListOfSnakes.add(aReusableSnake);
 		  
 	   }
 	   

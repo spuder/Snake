@@ -11,7 +11,7 @@ import controller.ConvertLedType;
  * @author Spencer Owen 
  * @version 1.0
  */
-public class Snake 
+public class Snake extends Game
 {
 	public Logger logger = Logger.getLogger(this.getClass() );
     
@@ -287,17 +287,18 @@ public class Snake
 		int headPosition = anArray.get(0);
 		System.out.println("headposition is " + headPosition);
 		
-		int numberOfApples = model.Arena.aListOfApples.size();
-		System.out.println("numberOfApples is now: "+ numberOfApples);
+		//aListOfApples is actually a field in the parent here we set the size
+		int numberOfApples = aListOfApples.size();
+		logger.debug("numberOfApples is now: "+ numberOfApples);
 		
 
-		for ( numberOfApples = model.Arena.aListOfApples.size() - 1; numberOfApples >=0; numberOfApples--)
+		for ( numberOfApples = aListOfApples.size() - 1; numberOfApples >=0; numberOfApples--)
 		{
-			if ( model.Arena.aListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
+			if ( aListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
 			{
-				System.out.println("We have hit an apple!!!!!!!!");
+				logger.error("Cannot create an apple where another apple already exists, statistically this happens once every 4095 apples");
 				//Check to see if we got our own apple or someone else's
-				if(model.Arena.aListOfApples.get(numberOfApples).getColor() != this.getColor() )
+				if(aListOfApples.get(numberOfApples).getColor() != this.getColor() )
 				{
 					//Add 100 points to the score;
 					this.setScore(100);

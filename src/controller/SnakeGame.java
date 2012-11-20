@@ -25,7 +25,7 @@ public class SnakeGame {
 		//Setup log4j
 		//BasicConfigurator.configure();
 		
-		controller.GameController theGameController = new controller.GameController();
+//		controller.GameController theGameController = new controller.GameController();
 //		controller.ArenaController theArenaController = new controller.ArenaController();
 
 		
@@ -46,13 +46,13 @@ public class SnakeGame {
 		int numberOfPlayersToInt = Integer.parseInt( numberOfPlayers );
 		
 		logger.info("Creating " + numberOfPlayers + " snakes");
-		theGameController.createSnakes(numberOfPlayersToInt);
+		aGame.createSnakes(numberOfPlayersToInt);
 		
 		logger.info("Creating " + numberOfPlayers + " apples");
 		for (Snake aSnake : aGame.getaListOfSnakes())
 		{
 			int snakeColor = aSnake.getColor();
-			theGameController.createApple(snakeColor);
+			aGame.createApple(snakeColor);
 			logger.debug("Creating Apple with color " + snakeColor);
 			
 		}
