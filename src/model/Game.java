@@ -32,7 +32,7 @@ public class Game
 	 */
 	public Game()
 	{
-		this.numberOfPlayers = numberOfPlayers;
+		this.numberOfPlayers = 1;
 		this.cubeType = cubeType;; 
 		this.gameMode = gameMode;
 		this.gamePaused = true;
@@ -59,7 +59,7 @@ public class Game
 		this.gamePaused = gamePaused;
 	}
 
-	public ArrayList<Apple> getaListOfApples() {
+	public List<Apple> getaListOfApples() {
 		return aListOfApples;
 	}
 
@@ -67,7 +67,7 @@ public class Game
 		this.aListOfApples = aListOfApples;
 	}
 
-	public ArrayList<Snake> getaListOfSnakes() {
+	public List<Snake> getaListOfSnakes() {
 		return aListOfSnakes;
 	}
 

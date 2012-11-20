@@ -345,6 +345,8 @@ public class Snake extends Game
 	}// end appleCheck
 	
 	
+
+	
     
  
 
