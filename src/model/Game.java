@@ -158,13 +158,6 @@ public class Game {
 
 	public void createApple(int appleColor) {
 
-		// TODO:Delete this test code
-		// model.Apple anApple = new model.Apple(10,255);
-		// model.Arena.aListOfApples.add(anApple);
-		//
-		// model.Apple anApple2 = new model.Apple(9,255);
-		// model.Arena.aListOfApples.add(anApple);
-
 		int temporaryAppleLocation;
 		int minumumLed = 0;
 		// //Get the highest number in the Arena and generate a random number
@@ -184,7 +177,7 @@ public class Game {
 		boolean appleCollisionCheck = false;
 		boolean snakeCollisionCheck = false;
 
-		// Keep creating new Apples until we have determined it is random
+		// Keep creating new Apples until we have determined it is unique
 		// do while statement are different then while because they do the
 		// evaluation at the end of the loop
 		do {
@@ -217,12 +210,13 @@ public class Game {
 			if (appleCollisionCheck == false || snakeCollisionCheck == false) {
 
 				logger.warn("Creating a new Apple since there was a collision at: "
-						+ temporaryAppleLocation);
+						+ temporaryAppleLocation + " This is expected every 1 out of 4096 apples or so");
 				// temporaryAppleLocation = aRandomNumber.nextInt(maximumLed -
 				// minumumLed) + minumumLed;
 				temporaryAppleLocation = aRandomNumber.nextInt(maximumLed);
 
 				// Since we had a collision, reset both of the checks to false
+				// This will go back to the beginning of the for loop and try again
 				appleCollisionCheck = false;
 				snakeCollisionCheck = false;
 
@@ -233,11 +227,16 @@ public class Game {
 		Apple anApple = new Apple(temporaryAppleLocation, appleColor);
 		logger.info("Added a new apple with color:  " + appleColor
 				+ " at location: " + temporaryAppleLocation);
+		//Add the newly created apple to the array
 		aListOfApples.add(anApple);
 
 	}
 
-	public static void destroyApple() {
+	public  void destroyApple(Apple anApple) {
+		//A null apple throws a null pointer exception
+		//A nonexistent apple throws a serious error and logs
+		
+		//Take an apple and remove it from the array of apples
 
 	}
 
