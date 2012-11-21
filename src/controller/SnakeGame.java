@@ -8,6 +8,9 @@ import org.apache.log4j.PropertyConfigurator;
 import model.CubeAttributes;
 import model.Snake;
 
+import jssc.SerialPort;
+import jssc.SerialPortException;
+
 
 
 public class SnakeGame {
@@ -16,6 +19,7 @@ public class SnakeGame {
 
 
 	public static void main(String[] args) {
+
 		view.SnakeGui theGui = new view.SnakeGui();
 		
 		model.CubeAttributes.setxNumberOfLedsPerRow(16);
@@ -25,17 +29,19 @@ public class SnakeGame {
 		CubeAttributes.yNumberOfRowsPerPanel = 16;
 		CubeAttributes.zNumberOfPanelsPerCube = 16;
 		
-//		model.Arena.xMaximum = 15;
-//		model.Arena.yMaximum = 15;
-//		model.Arena.zMaximum = 15;
+
 		
 		model.Game aGame = new model.Game();
 		
-		String numberOfPlayers = JOptionPane.showInputDialog("Enter Number of Players");
+//		String numberOfPlayers = JOptionPane.showInputDialog("Enter Number of Players");
+		String numberOfPlayers = "4";
 		int numberOfPlayersToInt = Integer.parseInt( numberOfPlayers );
 		
 		logger.info("Creating " + numberOfPlayers + " snakes");
 		aGame.createSnakes(numberOfPlayersToInt);
+		
+		//AdaptiveCube theAdaptiveCube = new AdaptiveCube();
+		
 		
 		logger.info("Creating " + numberOfPlayers + " apples");
 		for (Snake aSnake : aGame.getaListOfSnakes())
@@ -47,17 +53,7 @@ public class SnakeGame {
 		}
 		
 		
-		
-		
-		
-		logger.debug("Entering SnakeGame.while loop");
-//		while(model.Game.isGamePaused() == false)
-//		{
-//			
-//			
-//			
-//
-//		}
+
 		
 		
 		
@@ -67,7 +63,7 @@ public class SnakeGame {
 	
 	public static void setupGame()
 	{
-		
+
 	}
 	
 	public static void startGame()

@@ -17,6 +17,8 @@ import javax.swing.JMenuBar;
 @SuppressWarnings("serial")
 public class SnakeGui extends JFrame 
 {
+	SerialJPanel aSerialJPanel;
+	PlayerJPanel aPlayerJPanel;
 
 		public static final int MAIN_HEIGHT = 515;
 	    public static final int MAIN_WIDTH = 800;
@@ -26,22 +28,29 @@ public class SnakeGui extends JFrame
 	    private JMenu crawl = new JMenu("Crawl");
 	    private JMenu help = new JMenu("Help");
 	    
-	    //Not sure what this code does, but skyler has it in his project
-	    public static SnakeGui GUI;
-	    private SnakeGui self;
+//	    //Not sure what this code does, but skyler has it in his project
+//	    public static SnakeGui GUI;
+//	    private SnakeGui self;
 	    
 		public SnakeGui() throws HeadlessException 
 		{
-			//Not sure what this code does, but skyler has it in his project
-			self = this;
-			SnakeGui.GUI = this;
+//			//Not sure what this code does, but skyler has it in his project
+//			self = this;
+//			SnakeGui.GUI = this;
 	    	
+			aSerialJPanel = new SerialJPanel();
+			aPlayerJPanel = new PlayerJPanel();
+			
+			
 			this.setTitle("Snake");
 	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	        
 	        buildMenu();
 	        
+	        this.add(aSerialJPanel);
+	        this.add(aPlayerJPanel);
+	        setSize(600,400);
 	        this.setLocationRelativeTo(null);
 	        this.setVisible(true);
 			
