@@ -49,7 +49,13 @@ public class SnakeGame {
 	}// end main
 
 	public static void setupGame() {
+		//First establish the cube type, Adaptive, Seekway ect..
+		//Get the attributes from the Cube and set CubeAttributes Class
+		
+		//Get all the available serial ports
+		//Set the proper serial port in the AdaptiveCube or Seekway Class
 
+		
 	}
 
 	public static void startGame() {
