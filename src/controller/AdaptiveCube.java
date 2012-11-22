@@ -10,7 +10,7 @@ public class AdaptiveCube implements SerialInterface {
 	int xNumberOfLeds 	= 16;
 	int yNumberOfLeds 	= 16;
 	int zNumberOfLeds 	= 16;
-	int base0or1 = 1; // Some cubes consider 1,1,1 the origin, others consider
+	int base0or1 		= 1; // Some cubes consider 1,1,1 the origin, others consider
 						// 0,0,0 the origin
 	String comPort;
 

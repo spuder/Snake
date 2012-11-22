@@ -5,10 +5,13 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Write a description of class SnakeGui here.
@@ -38,15 +41,30 @@ public class SnakeGui extends JFrame {
 		
 		
 /* *******Serial JPanel***************/		
-		aSerialJPanel 		= new JPanel( new BorderLayout() );
+		aSerialJPanel 		= new JPanel();
+		aSerialJPanel.setLayout(new BoxLayout(aSerialJPanel,BoxLayout.Y_AXIS) );
 		
+		aSerialJPanel.setBackground(Color.blue);
 		
+		JComboBox cubeType = new JComboBox(controller.SnakeGame.aListOfCubeTypes.toArray() );
+				  cubeType.setSelectedIndex(0);
+				  
+		aSerialJPanel.add(cubeType);
 		
+		JTextField xLedsPerCubeField = new JTextField();
+				   xLedsPerCubeField.setText("42"); 
+		JTextField yLedsPerCubeField = new JTextField();
+		JTextField zLedsPerCubeField = new JTextField();
+		
+		aSerialJPanel.add(xLedsPerCubeField);
+		aSerialJPanel.add(yLedsPerCubeField);
+		aSerialJPanel.add(zLedsPerCubeField);
 		
 		
 		
 /* *******Player JPanel***************/		
-		aPlayerJPanel 		= new JPanel( new BorderLayout() );
+		aPlayerJPanel 		= new JPanel();
+		aPlayerJPanel.setLayout(new BoxLayout(aPlayerJPanel,BoxLayout.Y_AXIS )) ;
 
 		
 		
@@ -64,9 +82,9 @@ public class SnakeGui extends JFrame {
 
 		
 		buildMenu();
-
-		backgroundJPanel.add(aSerialJPanel);
 		backgroundJPanel.add(aPlayerJPanel);
+		backgroundJPanel.add(aSerialJPanel);
+
 		this.add(backgroundJPanel);
 		
 		this.setSize(600, 400);

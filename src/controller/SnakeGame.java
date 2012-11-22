@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
@@ -14,8 +15,14 @@ import jssc.SerialPortException;
 public class SnakeGame {
 	// Create a log4j instance
 	public static Logger logger = Logger.getLogger(SnakeGame.class);
+	
+	
+	public static List<String> aListOfCubeTypes;
 
 	public static void main(String[] args) {
+		aListOfCubeTypes = new ArrayList<String>();
+		aListOfCubeTypes.add("Adaptive");
+		aListOfCubeTypes.add("Hypno");
 
 		view.SnakeGui theGui = new view.SnakeGui();
 
