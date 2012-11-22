@@ -47,4 +47,32 @@ public class HypnoCube implements SerialInterface {
 
 	}
 
+
+	@Override
+	public int getxNumberOfLeds() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int getyNumberOfLeds() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int getzNumberOfLeds() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int getLedsPerCube() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

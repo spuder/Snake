@@ -7,6 +7,8 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 
 import controller.ConvertLedType;
+import controller.SerialInterface;
+import controller.SnakeGame;
 
 /**
  * Game has a mode, a paused status, number of players and cube type
@@ -14,7 +16,7 @@ import controller.ConvertLedType;
  * @author Spencer Owen
  * @version 1.0
  */
-public class Game {
+public class Game extends SnakeGame{
 	public Logger logger = Logger.getLogger(this.getClass());
 
 	private int numberOfPlayers;
@@ -169,7 +171,7 @@ public class Game {
 		int minumumLed = 0;
 		// //Get the highest number in the Arena and generate a random number
 		// less than it
-		int maximumLed = CubeAttributes.getNumberOfLedsPerCube() - 1;
+		int maximumLed = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube() - 1;
 		// logger.debug("Maximum led = " + maximumLed + ", Arena.xMaximum="+
 		// CubeAttributes.xNumberOfLedsPerRow-1 +", Arena.yMaximum="+
 		// Arena.yMaximum + ", Arena.zMaximum="+ Arena.zMaximum);

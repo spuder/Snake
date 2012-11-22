@@ -2,8 +2,6 @@ package test;
 
 import static org.junit.Assert.*;
 
-import model.CubeAttributes;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,12 +22,12 @@ public class GameTest {
 	public void setUp() throws Exception {
 		//Set the cube attributes
 		
-		model.CubeAttributes.setxNumberOfLedsPerRow(16);
-		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
-		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
-		CubeAttributes.xNumberOfLedsPerRow = 16;
-		CubeAttributes.yNumberOfRowsPerPanel = 16;
-		CubeAttributes.zNumberOfPanelsPerCube = 16;
+//		model.CubeAttributes.setxNumberOfLedsPerRow(16);
+//		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
+//		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
+//		CubeAttributes.xNumberOfLedsPerRow = 16;
+//		CubeAttributes.yNumberOfRowsPerPanel = 16;
+//		CubeAttributes.zNumberOfPanelsPerCube = 16;
 	}
 
 	@After
