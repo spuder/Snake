@@ -1,5 +1,5 @@
 package model;
-
+/*
 //import controller.ConvertLedType;
 
 public class CubeAttributes {
@@ -90,3 +90,4 @@ public class CubeAttributes {
 	}
 
 }
+*/

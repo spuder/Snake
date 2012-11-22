@@ -4,9 +4,7 @@ import java.util.Locale;
 
 import org.apache.log4j.Logger;
 
-import model.CubeAttributes;
-
-public class ConvertLedType {
+public class ConvertLedType extends SnakeGame{
 	//Create a new logger for this class
 	
 
@@ -36,9 +34,9 @@ public class ConvertLedType {
 		
 		//TODO: Not sure what the purpose of getInstance() is?
 		//CubeAttributes.getInstance();
-		int xNumberOfLedsPerRow = CubeAttributes.getxNumberOfLedsPerRow();
-		int yNumberOfRowsPerPanel = CubeAttributes.getyNumberOfRowsPerPanel();
-		int zNumberOfPanelsPerCube = CubeAttributes.getzNumberOfPanelsPerCube();
+		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
+		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
+		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
 		
 		int ledTotalRowNumber 		= (absoluteLedNumber / xNumberOfLedsPerRow); // 48 would return 3rd row TODO:Consider renaming locationInY
 	    int ledPanelNumber 			= (absoluteLedNumber / xNumberOfLedsPerRow / yNumberOfRowsPerPanel); //4095 would return panel 15, 300 returns panel 1 TODO:Consider renaming to locationINZ 
@@ -57,15 +55,15 @@ public class ConvertLedType {
 		 * and returns the relative y coordinate [x,y,z]. Assumes origin is base 0 [0,0,0]
 		 * 
 		 */
+		int ledsPerCube = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube();
 		if (absoluteLedNumber < 0) 
 			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
-		if (absoluteLedNumber > CubeAttributes.getNumberOfLedsPerCube() ) 
-			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + CubeAttributes.getNumberOfLedsPerCube() + " received: " + absoluteLedNumber ); 
+		if (absoluteLedNumber > ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getLedsPerCube() ) 
+			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + ledsPerCube + " received: " + absoluteLedNumber ); 
 		
-		CubeAttributes.getInstance();
-		int xNumberOfLedsPerRow = CubeAttributes.getxNumberOfLedsPerRow();
-		int yNumberOfRowsPerPanel = CubeAttributes.getyNumberOfRowsPerPanel();
-		int zNumberOfPanelsPerCube = CubeAttributes.getzNumberOfPanelsPerCube();
+		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
+		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
+		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
 		
 		int ledTotalRowNumber     = (absoluteLedNumber / xNumberOfLedsPerRow);
 		
@@ -81,15 +79,16 @@ public class ConvertLedType {
 	
 	public static int absoluteToZPositionInCube(int absoluteLedNumber)
 	{
+		int ledsPerCube = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube();
+		
 		if (absoluteLedNumber < 0) 
 			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
-		if (absoluteLedNumber > CubeAttributes.getNumberOfLedsPerCube() ) 
-			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + CubeAttributes.getNumberOfLedsPerCube() + " received: " + absoluteLedNumber ); 
+		if (absoluteLedNumber > ledsPerCube) 
+			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + ledsPerCube + " received: " + absoluteLedNumber ); 
 		
-		CubeAttributes.getInstance();
-		int xNumberOfLedsPerRow = CubeAttributes.getxNumberOfLedsPerRow();
-		int yNumberOfRowsPerPanel = CubeAttributes.getyNumberOfRowsPerPanel();
-		int znumberOfPanelsPerCube = CubeAttributes.getzNumberOfPanelsPerCube();
+		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
+		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
+		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
 		
 		int ledTotalRowNumber     = (absoluteLedNumber / xNumberOfLedsPerRow);      
 		//4095 would return panel 15, 300 returns panel 1 TODO:Consider renaming to locationINZ 
@@ -121,11 +120,10 @@ public class ConvertLedType {
 		if ( zPosition < 0 ) 
 			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + zPosition);
 		
-		CubeAttributes.getInstance();
-		int xNumberOfLedsPerRow = CubeAttributes.getxNumberOfLedsPerRow();
-		int yNumberOfRowsPerPanel = CubeAttributes.getyNumberOfRowsPerPanel();
-		int znumberOfPanelsPerCube = CubeAttributes.getzNumberOfPanelsPerCube();
-		int numberOfLedsPerCube = CubeAttributes.getNumberOfLedsPerCube();
+
+		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
+		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
+		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
 		
 		/*
 		 * This formula was provided by Thomas and Desmond Makkugi 

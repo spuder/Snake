@@ -8,8 +8,6 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import model.CubeAttributes;
-import model.Snake;
 
 import jssc.SerialPort;
 import jssc.SerialPortException;
@@ -22,6 +20,7 @@ public class SnakeGame extends Object{
 	public static Map<String, Object> 	aListOfCubeTypes;
 	public static List<String> 			aLIstOfSerialPorts;
 	
+	public static String activeCubeType;
 	
 
 	public static void main(String[] args) {
@@ -43,24 +42,26 @@ public class SnakeGame extends Object{
 		 * System.out.println("Baudrate is " + ( (SerialInterface) aListOfCubeTypes.get("Hypno")).getSerialBaudrate() ); 
 		 */
 		aListOfCubeTypes = new HashMap<String, Object>();
-		aListOfCubeTypes.put("Hypno", new HypnoCube() );
-		aListOfCubeTypes.put("Adaptive",new AdaptiveCube() );
+		aListOfCubeTypes.put("Adaptive",	new AdaptiveCube() 	);
+		aListOfCubeTypes.put("Hypno", 		new HypnoCube() 	);
+		aListOfCubeTypes.put("Seekway",  	new SeekwayCube() 	);
 		
 
 		view.SnakeGui theGui = new view.SnakeGui();
 
-		model.CubeAttributes.setxNumberOfLedsPerRow(16);
-		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
-		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
-		CubeAttributes.xNumberOfLedsPerRow = 16;
-		CubeAttributes.yNumberOfRowsPerPanel = 16;
-		CubeAttributes.zNumberOfPanelsPerCube = 16;
+//		model.CubeAttributes.setxNumberOfLedsPerRow(16);
+//		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
+//		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
+//		CubeAttributes.xNumberOfLedsPerRow = 16;
+//		CubeAttributes.yNumberOfRowsPerPanel = 16;
+//		CubeAttributes.zNumberOfPanelsPerCube = 16;
 
 		model.Game aGame = new model.Game();
 		
-		
-		System.out.println("Baudrate is " + ((SerialInterface) aListOfCubeTypes.get("Hypno")).getSerialBaudrate() );
+		activeCubeType = "Adaptive";
+		System.out.println("Baudrate is " + ( (SerialInterface) aListOfCubeTypes.get(activeCubeType)).getSerialBaudrate() );
 
+		
 		// String numberOfPlayers =
 		// JOptionPane.showInputDialog("Enter Number of Players");
 		String numberOfPlayers = "4";
@@ -70,7 +71,7 @@ public class SnakeGame extends Object{
 		aGame.createSnakes(numberOfPlayersToInt);
 
 		logger.info("Creating " + numberOfPlayers + " apples");
-		for (Snake aSnake : aGame.getaListOfSnakes()) {
+		for (model.Snake aSnake : aGame.getaListOfSnakes()) {
 			int snakeColor = aSnake.getColor();
 			aGame.createApple(snakeColor);
 			logger.debug("Creating Apple with color " + snakeColor);

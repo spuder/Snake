@@ -48,6 +48,15 @@ public interface SerialInterface
 	 * 
 	 */
 	void setComPort(String comPort);
+	
+	
+	int getxNumberOfLeds();
+	
+	int getyNumberOfLeds();
+	
+	int getzNumberOfLeds();
+	
+	int getLedsPerCube();
 
 	
 }
