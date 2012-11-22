@@ -10,10 +10,18 @@ import jssc.SerialPortList;
 public class SerialPort {
 
 	
-	String[] aListOfSerialPorts;
+	private String[] aListOfSerialPorts;
 	
-	public SerialPort(){throw new IllegalStateException("The constructor of SerialPort was called, should not have been possible");}
-
+	private static final SerialPort instance = new SerialPort();
+	
+	// This class has a private constructor so additional instances and child
+	// classes can not be created
+	private SerialPort(){}
+	
+	public static SerialPort getInstance() {
+		return instance;
+	}
+	
 	/**
 	 * Returns a string array of all serial ports on computer
 	 * If no serial ports are found then array index 0 contains 
@@ -32,8 +40,7 @@ public class SerialPort {
 			  return listOfNoSerialPorts;
 		  }
 		 
-		  return aListOfSerialPorts;
-		
+		  return aListOfSerialPorts;	
 	}
 
 	
