@@ -57,8 +57,11 @@ public class SnakeGui extends JFrame {
 		
 //		//Look up every type of cube we have in the hashmap and add each to the combo box
 		JComboBox cubeType 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.keySet().toArray() );
-				  cubeType.setSelectedIndex(0);
+		//Set the default to always be the Adaptive Cube		  
+			cubeType.setSelectedItem("Adaptive");
 		aSerialJPanel.add(cubeType);
+		
+		
 		
 		JTextField xLedsPerCubeField = new JTextField();
 				   xLedsPerCubeField.setText("42"); 
