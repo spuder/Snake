@@ -1,6 +1,8 @@
-package controller;
+package cubeTypes;
 
 import java.util.List;
+
+import controller.SerialInterface;
 import jssc.SerialPortList;
 
 public class AdaptiveCube implements SerialInterface  {

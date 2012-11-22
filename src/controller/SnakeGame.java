@@ -9,6 +9,10 @@ import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import cubeTypes.AdaptiveCube;
+import cubeTypes.HypnoCube;
+import cubeTypes.SeekwayCube;
+
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
