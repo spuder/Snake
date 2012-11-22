@@ -156,6 +156,13 @@ public class Game {
 
 	}
 
+	/**
+	 * Creates an apple object with the specified color as an integer
+	 * The color must be an integer representation of a 6 bit hex value
+	 * 
+	 * @param appleColor
+	 * @see destroyApple
+	 */
 	public void createApple(int appleColor) {
 
 		int temporaryAppleLocation;
