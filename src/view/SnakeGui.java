@@ -61,8 +61,11 @@ public class SnakeGui extends JFrame {
 		
 		JTextField xLedsPerCubeField = new JTextField();
 				   xLedsPerCubeField.setText("42"); 
+				   xLedsPerCubeField.setEditable(false);
 		JTextField yLedsPerCubeField = new JTextField();
+				   yLedsPerCubeField.setEditable(false);
 		JTextField zLedsPerCubeField = new JTextField();
+				   zLedsPerCubeField.setEditable(false);
 		
 		aSerialJPanel.add(xLedsPerCubeField);
 		aSerialJPanel.add(yLedsPerCubeField);
@@ -71,6 +74,10 @@ public class SnakeGui extends JFrame {
 		JComboBox serialPort 	= new JComboBox(model.SerialPort.getaListOfSerialPorts() );
 		serialPort.setSelectedIndex(0);
 		aSerialJPanel.add(serialPort);
+		
+		JTextField baudRate = new JTextField();
+				   
+		aSerialJPanel.add(baudRate);
 		
 		
 		
