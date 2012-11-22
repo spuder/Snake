@@ -1,10 +1,14 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 
 /**
  * Write a description of class SnakeGui here.
@@ -14,38 +18,61 @@ import javax.swing.JMenuBar;
  */
 @SuppressWarnings("serial")
 public class SnakeGui extends JFrame {
-	SerialJPanel aSerialJPanel;
-	PlayerJPanel aPlayerJPanel;
-
-	public static final int MAIN_HEIGHT = 515;
-	public static final int MAIN_WIDTH = 800;
+	
+	JPanel backgroundJPanel;
+	JPanel aSerialJPanel;
+	JPanel aPlayerJPanel;
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu file = new JMenu("File");
 	private JMenu crawl = new JMenu("Crawl");
 	private JMenu help = new JMenu("Help");
 
-	// //Not sure what this code does, but skyler has it in his project
-	// public static SnakeGui GUI;
-	// private SnakeGui self;
 
 	public SnakeGui() throws HeadlessException {
-		// //Not sure what this code does, but skyler has it in his project
-		// self = this;
-		// SnakeGui.GUI = this;
 
-		aSerialJPanel = new SerialJPanel();
-		aPlayerJPanel = new PlayerJPanel();
 
+/* *******Background JPanel***************/
+		backgroundJPanel 	= new JPanel( new GridLayout() );
+		backgroundJPanel.setVisible(true);
+		
+		
+/* *******Serial JPanel***************/		
+		aSerialJPanel 		= new JPanel( new BorderLayout() );
+		
+		
+		
+		
+		
+		
+/* *******Player JPanel***************/		
+		aPlayerJPanel 		= new JPanel( new BorderLayout() );
+
+		
+		
+		
+		
+/* *******Main JFrame***************/
+		
+		
+		//Set the JFrame title
 		this.setTitle("Snake");
+		//Set the JFrame Close button action
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		
+
+		
 		buildMenu();
 
-		this.add(aSerialJPanel);
-		this.add(aPlayerJPanel);
-		setSize(600, 400);
+		backgroundJPanel.add(aSerialJPanel);
+		backgroundJPanel.add(aPlayerJPanel);
+		this.add(backgroundJPanel);
+		
+		this.setSize(600, 400);
 		this.setLocationRelativeTo(null);
+		
+
 		this.setVisible(true);
 
 	}

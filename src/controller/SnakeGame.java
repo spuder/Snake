@@ -59,6 +59,8 @@ public class SnakeGame {
 	}
 
 	public static void startGame() {
+		//Create a new Game object with the parameters specified by the user
+		
 
 	}
 
