@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
@@ -12,18 +14,38 @@ import model.Snake;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
-public class SnakeGame {
+public class SnakeGame extends Object{
 	// Create a log4j instance
 	public static Logger logger = Logger.getLogger(SnakeGame.class);
 	
 	
-	public static List<String> aListOfCubeTypes;
-	public static List<String> aLIstOfSerialPorts;
+	public static Map<String, Object> 	aListOfCubeTypes;
+	public static List<String> 			aLIstOfSerialPorts;
+	
+	
 
 	public static void main(String[] args) {
-		aListOfCubeTypes = new ArrayList<String>();
-		aListOfCubeTypes.add("Adaptive");
-		aListOfCubeTypes.add("Hypno");
+		/*
+		 * Create a hashmap with every type of cube we support
+		 * we can get the Adaptive Object by simply calling the 
+		 * hashmap.get with key "Adaptive". We can get a Hypno object
+		 * by calling the hashmap with key "Hypno". Since both classes
+		 * implement the SerialInterface we can then call .getSerialBaudrate
+		 * or any other method. This makes the code extremely modular
+		 * because we only need to change 1 string to completely alter
+		 * the type of cube we are using. It could even be changed on the fly
+		 * (not that you would ever need to).
+		 * 
+		 * Note** you will need to cast the object returned to a SerialInterface to 
+		 * implement the methods. 
+		 * 
+		 * Example
+		 * System.out.println("Baudrate is " + ( (SerialInterface) aListOfCubeTypes.get("Hypno")).getSerialBaudrate() ); 
+		 */
+		aListOfCubeTypes = new HashMap<String, Object>();
+		aListOfCubeTypes.put("Hypno", new HypnoCube() );
+		aListOfCubeTypes.put("Adaptive",new AdaptiveCube() );
+		
 
 		view.SnakeGui theGui = new view.SnakeGui();
 
@@ -35,6 +57,9 @@ public class SnakeGame {
 		CubeAttributes.zNumberOfPanelsPerCube = 16;
 
 		model.Game aGame = new model.Game();
+		
+		
+		System.out.println("Baudrate is " + ((SerialInterface) aListOfCubeTypes.get("Hypno")).getSerialBaudrate() );
 
 		// String numberOfPlayers =
 		// JOptionPane.showInputDialog("Enter Number of Players");
@@ -43,8 +68,6 @@ public class SnakeGame {
 
 		logger.info("Creating " + numberOfPlayers + " snakes");
 		aGame.createSnakes(numberOfPlayersToInt);
-
-		// AdaptiveCube theAdaptiveCube = new AdaptiveCube();
 
 		logger.info("Creating " + numberOfPlayers + " apples");
 		for (Snake aSnake : aGame.getaListOfSnakes()) {

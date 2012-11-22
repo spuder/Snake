@@ -3,7 +3,7 @@ package controller;
 import java.util.List;
 import jssc.SerialPortList;
 
-public class AdaptiveCube implements SerialInterface {
+public class AdaptiveCube implements SerialInterface  {
 
 	int serialBaudRate 	= 11520;
 	int ledsPerCube 	= 4096;
@@ -15,10 +15,10 @@ public class AdaptiveCube implements SerialInterface {
 	String comPort;
 
 	public AdaptiveCube() {
-		super();
-		
 
 	}
+
+	
 
 	public int getSerialBaudrate() {
 		return serialBaudRate;

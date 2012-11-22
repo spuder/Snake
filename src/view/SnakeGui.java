@@ -55,7 +55,8 @@ public class SnakeGui extends JFrame {
 		
 		aSerialJPanel.setBackground(Color.blue);
 		
-		JComboBox cubeType 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.toArray() );
+//		//Look up every type of cube we have in the hashmap and add each to the combo box
+		JComboBox cubeType 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.keySet().toArray() );
 				  cubeType.setSelectedIndex(0);
 		aSerialJPanel.add(cubeType);
 		
