@@ -57,7 +57,6 @@ public class SnakeGui extends JFrame {
 		
 		JComboBox cubeType 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.toArray() );
 				  cubeType.setSelectedIndex(0);
-				  
 		aSerialJPanel.add(cubeType);
 		
 		JTextField xLedsPerCubeField = new JTextField();
@@ -69,6 +68,9 @@ public class SnakeGui extends JFrame {
 		aSerialJPanel.add(yLedsPerCubeField);
 		aSerialJPanel.add(zLedsPerCubeField);
 		
+		JComboBox serialPort 	= new JComboBox(model.SerialPort.getaListOfSerialPorts() );
+		serialPort.setSelectedIndex(0);
+		aSerialJPanel.add(serialPort);
 		
 		
 		

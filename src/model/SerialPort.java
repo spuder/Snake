@@ -12,7 +12,7 @@ public class SerialPort {
 	
 	String[] aListOfSerialPorts;
 	
-	public SerialPort(){}
+	public SerialPort(){throw new IllegalStateException("The constructor of SerialPort was called, should not have been possible");}
 
 	/**
 	 * Returns a string array of all serial ports on computer
@@ -21,13 +21,15 @@ public class SerialPort {
 	 * 
 	 * @return The list of serial ports on computer
 	 */
-	public String[] getaListOfSerialPorts() {
+	public static String[] getaListOfSerialPorts() {
  
 		 String[] aListOfSerialPorts = SerialPortList.getPortNames();
 		  
 		  if (aListOfSerialPorts.length <= 0) 
 		  {
-			  aListOfSerialPorts[0] ="No Serial Ports on this machine";
+			  String[] listOfNoSerialPorts = new String[1];
+			  listOfNoSerialPorts[0] ="No Serial Ports on this machine";
+			  return listOfNoSerialPorts;
 		  }
 		 
 		  return aListOfSerialPorts;
