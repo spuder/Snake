@@ -18,6 +18,7 @@ public class SnakeGame {
 	
 	
 	public static List<String> aListOfCubeTypes;
+	public static List<String> aLIstOfSerialPorts;
 
 	public static void main(String[] args) {
 		aListOfCubeTypes = new ArrayList<String>();

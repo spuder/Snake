@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
@@ -32,6 +32,15 @@ public class SnakeGui extends JFrame {
 	private JMenu help = new JMenu("Help");
 
 
+	/**
+	 * The snake gui constructor creates a JFrame and 3 JPanels
+	 * 2 of the JPanels are added to the background JPanel which
+	 * is then added to the JFrame
+	 * 
+	 * Displays the options for users to change the cube type, number
+	 * of players ect. 
+	 * @throws HeadlessException
+	 */
 	public SnakeGui() throws HeadlessException {
 
 
@@ -46,7 +55,7 @@ public class SnakeGui extends JFrame {
 		
 		aSerialJPanel.setBackground(Color.blue);
 		
-		JComboBox cubeType = new JComboBox(controller.SnakeGame.aListOfCubeTypes.toArray() );
+		JComboBox cubeType 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.toArray() );
 				  cubeType.setSelectedIndex(0);
 				  
 		aSerialJPanel.add(cubeType);
@@ -59,6 +68,7 @@ public class SnakeGui extends JFrame {
 		aSerialJPanel.add(xLedsPerCubeField);
 		aSerialJPanel.add(yLedsPerCubeField);
 		aSerialJPanel.add(zLedsPerCubeField);
+		
 		
 		
 		
