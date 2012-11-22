@@ -232,12 +232,39 @@ public class Game {
 
 	}
 
+	
+	/**
+	 * Removes the apple from the ArrayList of apple objects
+	 * 
+	 * @param anApple
+	 * @see createApple
+	 * @throws NullPointerException
+	 * @throws IllegalArgumentException
+	 */
 	public  void destroyApple(Apple anApple) {
 		//A null apple throws a null pointer exception
 		//A nonexistent apple throws a serious error and logs
+		if(anApple==null) {
+			logger.error("Game.destroyApple(anApple) was equal to Null");
+			throw new NullPointerException("anApple is equal to Null");
+		}
 		
-		//Take an apple and remove it from the array of apples
-
+		//Checks if an apple object exists but is not in apple Array(aListOfApples)
+		//A apple object not in the array of apples throws IllegalArgumentException and logs
+		boolean appleFound = false;
+		//Loop through the ArrayList and remove anApple
+		for (int i = 0; i < aListOfApples.size(); i++){
+			if (anApple.equals(aListOfApples.get(i))){
+				//Take an apple and remove it from the array of apples
+				aListOfApples.remove(i);
+				logger.warn(ConvertLedType.intToHex(anApple.getColor())+" has been removed from aListOfApples");
+				appleFound = true;
+			}
+		}
+		if (appleFound==false){
+			logger.error("Game.destroyApple(anApple) found an apple that wasn't in the aListOfApples array");
+			throw new IllegalArgumentException("Game.destroyApple(anApple) found an apple that wasn't in the aListOfApples array");
+		}		
 	}
 
 	public void checkHasCollidedWithSnakeBody(Snake aSnake) {
