@@ -7,6 +7,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 import org.apache.log4j.Logger;
 
@@ -33,6 +35,9 @@ public class SnakeGui extends JFrame {
 	JPanel backgroundJPanel;
 	JPanel aSerialJPanel;
 	JPanel aPlayerJPanel;
+	
+	//A title object that we reuse to make pretty black borders around panels
+	TitledBorder title;
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu file = new JMenu("File");
@@ -60,6 +65,11 @@ public class SnakeGui extends JFrame {
 /* *******Serial JPanel***************/		
 		aSerialJPanel 		= new JPanel();
 		aSerialJPanel.setLayout(new BoxLayout(aSerialJPanel,BoxLayout.Y_AXIS) );
+		
+		//Create a black border around the panel and set a title along the top
+			title  = BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.black), "Cube" );
+			title.setTitleJustification(TitledBorder.CENTER);
+		aSerialJPanel.setBorder(title);
 		
 		aSerialJPanel.setBackground(Color.blue);
 		
@@ -90,7 +100,7 @@ public class SnakeGui extends JFrame {
 
 		aSerialJPanel.add(serialPort);
 		
-		JTextField baudRate = new JTextField();
+		final JTextField baudRate = new JTextField();
 				   
 		aSerialJPanel.add(baudRate);
 		
@@ -99,7 +109,9 @@ public class SnakeGui extends JFrame {
 /* *******Player JPanel***************/		
 		aPlayerJPanel 		= new JPanel();
 		aPlayerJPanel.setLayout(new BoxLayout(aPlayerJPanel,BoxLayout.Y_AXIS )) ;
-
+			title  = BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.black), "Players" );
+			title.setTitleJustification(TitledBorder.CENTER);
+		aPlayerJPanel.setBorder(title );
 		
 		
 		
@@ -144,6 +156,7 @@ public class SnakeGui extends JFrame {
 					xLedsPerCubeField.setText(theCube.getxNumberOfLeds() +""); 
 					yLedsPerCubeField.setText(theCube.getyNumberOfLeds() +"");
 					zLedsPerCubeField.setText(theCube.getzNumberOfLeds() +"");
+					baudRate.setText( theCube.getSerialBaudrate() +"");
 					logger.debug("The system recognizes *"+ controller.SnakeGame.activeCubeType + "* as the current cube type");
 					
 				}});
