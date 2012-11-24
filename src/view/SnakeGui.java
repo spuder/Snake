@@ -9,11 +9,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -23,10 +26,10 @@ import controller.SerialInterface;
 import controller.SnakeGame;
 
 /**
- * Write a description of class SnakeGui here.
+ * SnakeGui has 1 JFrame and 3 JPanels so the user can set the game preferences
  * 
- * @author (your name)
- * @version (a version number or a date)
+ * @author Spuder
+ * @version 2012-November-23
  */
 @SuppressWarnings("serial")
 public class SnakeGui extends JFrame {
@@ -38,6 +41,19 @@ public class SnakeGui extends JFrame {
 	
 	//A title object that we reuse to make pretty black borders around panels
 	TitledBorder title;
+	
+	final JTextField xLedsPerCubeField;
+	final JTextField yLedsPerCubeField;
+	final JTextField zLedsPerCubeField;
+	
+	//Radio Buttons to select the number of players
+	final JRadioButton player1;
+	final JRadioButton player2;
+	final JRadioButton player3;
+	final JRadioButton player4;
+	ButtonGroup playerButtonGroup;
+	
+	final JTextField baudRate;
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu file = new JMenu("File");
@@ -73,7 +89,7 @@ public class SnakeGui extends JFrame {
 		
 		aSerialJPanel.setBackground(Color.blue);
 		
-//		//Look up every type of cube we have in the hashmap and add each to the combo box
+		//Look up every type of cube we have in the hashmap and add each to the combo box
 		final JComboBox cubeType 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.keySet().toArray() );
 		//Set the default to always be the Adaptive Cube		  
 			cubeType.setSelectedItem("Adaptive");
@@ -83,24 +99,25 @@ public class SnakeGui extends JFrame {
 		
 		
 		
-		final JTextField xLedsPerCubeField = new JTextField();
+		xLedsPerCubeField = new JTextField();
 				   xLedsPerCubeField.setText("42"); 
 				   xLedsPerCubeField.setEditable(false);
-		final JTextField yLedsPerCubeField = new JTextField();
+		yLedsPerCubeField = new JTextField();
 				   yLedsPerCubeField.setEditable(false);
-		final JTextField zLedsPerCubeField = new JTextField();
+		zLedsPerCubeField = new JTextField();
 				   zLedsPerCubeField.setEditable(false);
 		
 		aSerialJPanel.add(xLedsPerCubeField);
 		aSerialJPanel.add(yLedsPerCubeField);
 		aSerialJPanel.add(zLedsPerCubeField);
 		
-		JComboBox serialPort 	= new JComboBox(model.SerialPort.getaListOfSerialPorts() );
+		JComboBox serialPort 	= new JComboBox( model.SerialPort.getaListOfSerialPorts() );
 		serialPort.setSelectedIndex(0);
 
 		aSerialJPanel.add(serialPort);
 		
-		final JTextField baudRate = new JTextField();
+		baudRate = new JTextField();
+		baudRate.setEditable(false);
 				   
 		aSerialJPanel.add(baudRate);
 		
@@ -113,7 +130,26 @@ public class SnakeGui extends JFrame {
 			title.setTitleJustification(TitledBorder.CENTER);
 		aPlayerJPanel.setBorder(title );
 		
+		//Create a radio button for every player
+		player1 = new JRadioButton("1 Player");
+		player2 = new JRadioButton("2 Player");
+		player3 = new JRadioButton("3 Player");
+		player4 = new JRadioButton("4 Player");
 		
+		//Set 4 player game as default
+		player4.setSelected(true);
+		
+		//Add each button to the button group
+		playerButtonGroup = new ButtonGroup();
+		playerButtonGroup.add(player1);
+		playerButtonGroup.add(player2);
+		playerButtonGroup.add(player3);
+		playerButtonGroup.add(player4);
+		
+		aPlayerJPanel.add(player1);
+		aPlayerJPanel.add(player2);
+		aPlayerJPanel.add(player3);
+		aPlayerJPanel.add(player4);
 		
 		
 /* *******Main JFrame***************/
@@ -133,7 +169,7 @@ public class SnakeGui extends JFrame {
 
 		this.add(backgroundJPanel);
 		
-		this.setSize(600, 400);
+		this.setSize(800, 496);
 		this.setLocationRelativeTo(null);
 		
 
