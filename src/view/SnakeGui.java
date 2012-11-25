@@ -31,9 +31,12 @@ import controller.SnakeGame;
  * @author Spuder
  * @version 2012-November-23
  */
-@SuppressWarnings("serial")
+//@SuppressWarnings("serial")
 public class SnakeGui extends JFrame {
 	public Logger logger = Logger.getLogger(this.getClass() );
+	
+	//An object that implements the API, it can be an adaptive cube or seekway cube object
+	SerialInterface theCube;
 	
 	JPanel backgroundJPanel;
 	JPanel aSerialJPanel;
@@ -41,6 +44,9 @@ public class SnakeGui extends JFrame {
 	
 	//A title object that we reuse to make pretty black borders around panels
 	TitledBorder title;
+	
+	//Combo Boxto choose the cube type
+	final JComboBox cubeTypeComboBox;
 	
 	final JTextField xLedsPerCubeField;
 	final JTextField yLedsPerCubeField;
@@ -51,14 +57,10 @@ public class SnakeGui extends JFrame {
 	final JRadioButton player2;
 	final JRadioButton player3;
 	final JRadioButton player4;
-	ButtonGroup playerButtonGroup;
+	final ButtonGroup playerButtonGroup;
 	
+	final JComboBox serialPortComboBox;
 	final JTextField baudRate;
-
-	private JMenuBar menuBar = new JMenuBar();
-	private JMenu file = new JMenu("File");
-	private JMenu crawl = new JMenu("Crawl");
-	private JMenu help = new JMenu("Help");
 
 
 	/**
@@ -72,7 +74,13 @@ public class SnakeGui extends JFrame {
 	 */
 	public SnakeGui() throws HeadlessException {
 
-
+		//Set the active cube type to Adaptive
+		controller.SnakeGame.activeCubeType = "Adaptive Cube"; //TODO: There must be a better way to do this with .toString. See line 20 lower
+		
+		//Create an Object of any type
+		theCube =  (SerialInterface) controller.SnakeGame.aListOfCubeTypes.get( controller.SnakeGame.activeCubeType );
+		
+		
 /* *******Background JPanel***************/
 		backgroundJPanel 	= new JPanel( new GridLayout() );
 		backgroundJPanel.setVisible(true);
@@ -83,42 +91,54 @@ public class SnakeGui extends JFrame {
 		aSerialJPanel.setLayout(new BoxLayout(aSerialJPanel,BoxLayout.Y_AXIS) );
 		
 		//Create a black border around the panel and set a title along the top
-			title  = BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.black), "Cube" );
-			title.setTitleJustification(TitledBorder.CENTER);
+		title  = BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.black), "Cube" );
+		title.setTitleJustification(TitledBorder.CENTER);
 		aSerialJPanel.setBorder(title);
 		
+		//Set the background color of the serial JPanel to blue
 		aSerialJPanel.setBackground(Color.blue);
 		
 		//Look up every type of cube we have in the hashmap and add each to the combo box
-		final JComboBox cubeType 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.keySet().toArray() );
+		cubeTypeComboBox 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.keySet().toArray() );
+		
 		//Set the default to always be the Adaptive Cube		  
-			cubeType.setSelectedItem("Adaptive");
-			
-			
-		aSerialJPanel.add(cubeType);
+//		cubeTypeComboBox.setSelectedItem("Adaptive"); //TODO: There must be a better way with .toString. See line 20 up
+		cubeTypeComboBox.setSelectedItem(theCube.toString() );
+		System.out.println(theCube.toString() );
 		
+		//Add the combo box to the serial JPanel
+		aSerialJPanel.add(cubeTypeComboBox);
 		
-		
+
 		xLedsPerCubeField = new JTextField();
-				   xLedsPerCubeField.setText("42"); 
-				   xLedsPerCubeField.setEditable(false);
-		yLedsPerCubeField = new JTextField();
-				   yLedsPerCubeField.setEditable(false);
-		zLedsPerCubeField = new JTextField();
-				   zLedsPerCubeField.setEditable(false);
+		xLedsPerCubeField.setText(theCube.getxNumberOfLeds() +""); 
+		xLedsPerCubeField.setEditable(false);
 		
+		yLedsPerCubeField = new JTextField();
+		yLedsPerCubeField.setText(theCube.getyNumberOfLeds() +"");
+		yLedsPerCubeField.setEditable(false);
+		
+		zLedsPerCubeField = new JTextField();
+		zLedsPerCubeField.setText(theCube.getzNumberOfLeds() +"");
+		zLedsPerCubeField.setEditable(false);
+				   
+
+		//Create the Serial Port ComboBox
+		serialPortComboBox = new JComboBox( model.SerialPort.getaListOfSerialPorts() );
+		
+		//Set the serial port to default, 
+		serialPortComboBox.setSelectedIndex(0);
+
+		baudRate = new JTextField();
+		baudRate.setText( theCube.getSerialBaudrate() +"");
+		baudRate.setEditable(false);
+			
 		aSerialJPanel.add(xLedsPerCubeField);
 		aSerialJPanel.add(yLedsPerCubeField);
 		aSerialJPanel.add(zLedsPerCubeField);
 		
-		JComboBox serialPort 	= new JComboBox( model.SerialPort.getaListOfSerialPorts() );
-		serialPort.setSelectedIndex(0);
-
-		aSerialJPanel.add(serialPort);
-		
-		baudRate = new JTextField();
-		baudRate.setEditable(false);
-				   
+		//Add serialPort combo box to Serial JPanel
+		aSerialJPanel.add(serialPortComboBox);
 		aSerialJPanel.add(baudRate);
 		
 		
@@ -157,22 +177,24 @@ public class SnakeGui extends JFrame {
 		
 		//Set the JFrame title
 		this.setTitle("Snake");
+		
 		//Set the JFrame Close button action
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		
-
-		
-		buildMenu();
+		//Add the to JPanels to the main background panel
 		backgroundJPanel.add(aPlayerJPanel);
 		backgroundJPanel.add(aSerialJPanel);
 
+		//Add the background panel to the JFrame
 		this.add(backgroundJPanel);
 		
+		//Set the size of the JFrame
 		this.setSize(800, 496);
+		//Set the JFrame to the center of the screen
 		this.setLocationRelativeTo(null);
 		
-
+		//Set the JFrame visible
 		this.setVisible(true);
 		
 		
@@ -180,18 +202,20 @@ public class SnakeGui extends JFrame {
 		
 		/* **********Action Listeners ****************/
 		//Action Listener for the CubeType comboBox 
-		cubeType.addActionListener(new ActionListener() {
+		cubeTypeComboBox.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					logger.error("The user clicked to change the cube type to "+ (String) cubeType.getSelectedItem() );
+					logger.error("The user clicked to change the cube type to "+ (String) cubeTypeComboBox.getSelectedItem() );
 					
 					//Set the new cube type based on what the user selected
-					controller.SnakeGame.activeCubeType = (String) cubeType.getSelectedItem();
+					controller.SnakeGame.activeCubeType = (String) cubeTypeComboBox.getSelectedItem();
 					
 					//Get the x y and z for the new cube type
-					SerialInterface theCube =  (SerialInterface) controller.SnakeGame.aListOfCubeTypes.get(controller.SnakeGame.activeCubeType);
+					theCube =  (SerialInterface) controller.SnakeGame.aListOfCubeTypes.get(controller.SnakeGame.activeCubeType);
+					
 					xLedsPerCubeField.setText(theCube.getxNumberOfLeds() +""); 
 					yLedsPerCubeField.setText(theCube.getyNumberOfLeds() +"");
 					zLedsPerCubeField.setText(theCube.getzNumberOfLeds() +"");
+					
 					baudRate.setText( theCube.getSerialBaudrate() +"");
 					logger.debug("The system recognizes *"+ controller.SnakeGame.activeCubeType + "* as the current cube type");
 					
@@ -199,13 +223,6 @@ public class SnakeGui extends JFrame {
 
 	}
 
-	public void buildMenu() {
-		menuBar.add(file);
-		menuBar.add(crawl);
-		menuBar.add(help);
 
-		// Turn on the menuBar
-		this.setJMenuBar(menuBar);
-	}
 
 }

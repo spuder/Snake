@@ -72,6 +72,8 @@ public class AdaptiveCube implements SerialInterface  {
 		return ledsPerCube;
 	}
 
-
+	public String toString() {
+		return "Adaptive Cube";
+	}
 
 }

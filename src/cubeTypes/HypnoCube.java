@@ -73,4 +73,7 @@ public class HypnoCube implements SerialInterface {
 		return ledsPerCube;
 	}
 
+	public String toString() {
+		return "Hypno Cube";
+	}
 }

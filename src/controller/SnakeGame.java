@@ -46,28 +46,19 @@ public class SnakeGame extends Object{
 		 * System.out.println("Baudrate is " + ( (SerialInterface) aListOfCubeTypes.get("Hypno")).getSerialBaudrate() ); 
 		 */
 		aListOfCubeTypes = new HashMap<String, Object>();
-		aListOfCubeTypes.put("Adaptive",	new AdaptiveCube() 	);
-		aListOfCubeTypes.put("Hypno", 		new HypnoCube() 	);
-		aListOfCubeTypes.put("Seekway",  	new SeekwayCube() 	);
+		aListOfCubeTypes.put("Adaptive Cube",	new AdaptiveCube() 	);
+		aListOfCubeTypes.put("Hypno Cube", 		new HypnoCube() 	);
+		aListOfCubeTypes.put("Seekway Cube",  	new SeekwayCube() 	);
 		
 
 		view.SnakeGui theGui = new view.SnakeGui();
 
-//		model.CubeAttributes.setxNumberOfLedsPerRow(16);
-//		model.CubeAttributes.setyNumberOfRowsPerPanel(16);
-//		model.CubeAttributes.setzNumberOfPanelsPerCube(16);
-//		CubeAttributes.xNumberOfLedsPerRow = 16;
-//		CubeAttributes.yNumberOfRowsPerPanel = 16;
-//		CubeAttributes.zNumberOfPanelsPerCube = 16;
 
 		model.Game aGame = new model.Game();
 		
-		activeCubeType = "Adaptive";
-		System.out.println("Baudrate is " + ( (SerialInterface) aListOfCubeTypes.get(activeCubeType)).getSerialBaudrate() );
+		//This is not needed since it is set when the gui is created
+//		activeCubeType = "Adaptive Cube";
 
-		
-		// String numberOfPlayers =
-		// JOptionPane.showInputDialog("Enter Number of Players");
 		String numberOfPlayers = "4";
 		int numberOfPlayersToInt = Integer.parseInt(numberOfPlayers);
 

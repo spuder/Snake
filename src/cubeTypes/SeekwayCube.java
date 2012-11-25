@@ -68,4 +68,7 @@ public class SeekwayCube implements SerialInterface {
 		return 0;
 	}
 
+	public String toString() {
+		return "Seekway Cube";
+	}
 }

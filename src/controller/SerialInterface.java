@@ -49,14 +49,35 @@ public interface SerialInterface
 	 */
 	void setComPort(String comPort);
 	
-	
+	/**
+	 * Returns the number of Leds in the x plane
+	 * @return numberOfLeds
+	 */
 	int getxNumberOfLeds();
 	
+	/**
+	 * Returns the number of Leds in the y plane
+	 * @return numberOfLeds
+	 */
 	int getyNumberOfLeds();
 	
+	/**
+	 * Returns the number of Leds in the z plane
+	 * @return numberOfLeds
+	 */
 	int getzNumberOfLeds();
 	
+	/**
+	 * Returns the number of Leds in the entire cube
+	 * @return numberOfLeds
+	 */
 	int getLedsPerCube();
 
-	
+	/**
+	 * Returns the name of the cube
+	 * This is used in the GUI dropdown box to choose the active cube type
+	 * Standard is one word followed by the word "cube"
+	 * Examples "Adaptive Cube", "SeekWay Cube", "Hypno Cube" ect..
+	 */
+	String toString();
 }
