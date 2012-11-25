@@ -13,6 +13,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -45,12 +46,12 @@ public class SnakeGui extends JFrame {
 	//A title object that we reuse to make pretty black borders around panels
 	TitledBorder title;
 	
-	//Combo Boxto choose the cube type
+	//Combo Box to choose the cube type
 	final JComboBox cubeTypeComboBox;
 	
-	final JTextField xLedsPerCubeField;
-	final JTextField yLedsPerCubeField;
-	final JTextField zLedsPerCubeField;
+	final JLabel xLedsPerCubeField;
+	final JLabel yLedsPerCubeField;
+	final JLabel zLedsPerCubeField;
 	
 	//Radio Buttons to select the number of players
 	final JRadioButton player1;
@@ -60,7 +61,10 @@ public class SnakeGui extends JFrame {
 	final ButtonGroup playerButtonGroup;
 	
 	final JComboBox serialPortComboBox;
-	final JTextField baudRate;
+	final JLabel baudRate;
+	
+	final JButton startButton;
+	
 
 
 	/**
@@ -96,7 +100,7 @@ public class SnakeGui extends JFrame {
 		aSerialJPanel.setBorder(title);
 		
 		//Set the background color of the serial JPanel to blue
-		aSerialJPanel.setBackground(Color.blue);
+//		aSerialJPanel.setBackground(Color.blue);
 		
 		//Look up every type of cube we have in the hashmap and add each to the combo box
 		cubeTypeComboBox 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.keySet().toArray() );
@@ -110,17 +114,17 @@ public class SnakeGui extends JFrame {
 		aSerialJPanel.add(cubeTypeComboBox);
 		
 
-		xLedsPerCubeField = new JTextField();
-		xLedsPerCubeField.setText(theCube.getxNumberOfLeds() +""); 
-		xLedsPerCubeField.setEditable(false);
+		xLedsPerCubeField = new JLabel();
+		xLedsPerCubeField.setText("x = " + theCube.getxNumberOfLeds() +""); 
+//		xLedsPerCubeField.setEditable(false);
 		
-		yLedsPerCubeField = new JTextField();
-		yLedsPerCubeField.setText(theCube.getyNumberOfLeds() +"");
-		yLedsPerCubeField.setEditable(false);
+		yLedsPerCubeField = new JLabel();
+		yLedsPerCubeField.setText("y = " + theCube.getyNumberOfLeds() +"");
+//		yLedsPerCubeField.setEditable(false);
 		
-		zLedsPerCubeField = new JTextField();
-		zLedsPerCubeField.setText(theCube.getzNumberOfLeds() +"");
-		zLedsPerCubeField.setEditable(false);
+		zLedsPerCubeField = new JLabel();
+		zLedsPerCubeField.setText("z = " + theCube.getzNumberOfLeds() +"");
+//		zLedsPerCubeField.setEditable(false);
 				   
 
 		//Create the Serial Port ComboBox
@@ -129,9 +133,9 @@ public class SnakeGui extends JFrame {
 		//Set the serial port to default, 
 		serialPortComboBox.setSelectedIndex(0);
 
-		baudRate = new JTextField();
+		baudRate = new JLabel();
 		baudRate.setText( theCube.getSerialBaudrate() +"");
-		baudRate.setEditable(false);
+//		baudRate.setEditable(false);
 			
 		aSerialJPanel.add(xLedsPerCubeField);
 		aSerialJPanel.add(yLedsPerCubeField);
@@ -166,10 +170,18 @@ public class SnakeGui extends JFrame {
 		playerButtonGroup.add(player3);
 		playerButtonGroup.add(player4);
 		
+		startButton = new JButton("Start Game");
+		
+		
 		aPlayerJPanel.add(player1);
 		aPlayerJPanel.add(player2);
 		aPlayerJPanel.add(player3);
 		aPlayerJPanel.add(player4);
+		
+		aPlayerJPanel.add(startButton);
+		
+		
+		
 		
 		
 /* *******Main JFrame***************/
@@ -212,17 +224,59 @@ public class SnakeGui extends JFrame {
 					//Get the x y and z for the new cube type
 					theCube =  (SerialInterface) controller.SnakeGame.aListOfCubeTypes.get(controller.SnakeGame.activeCubeType);
 					
-					xLedsPerCubeField.setText(theCube.getxNumberOfLeds() +""); 
-					yLedsPerCubeField.setText(theCube.getyNumberOfLeds() +"");
-					zLedsPerCubeField.setText(theCube.getzNumberOfLeds() +"");
+					xLedsPerCubeField.setText("x = " + theCube.getxNumberOfLeds() +""); 
+					yLedsPerCubeField.setText("y = " + theCube.getyNumberOfLeds() +"");
+					zLedsPerCubeField.setText("z = " + theCube.getzNumberOfLeds() +"");
 					
 					baudRate.setText( theCube.getSerialBaudrate() +"");
 					logger.debug("The system recognizes *"+ controller.SnakeGame.activeCubeType + "* as the current cube type");
 					
 				}});
+		
+		//Action Listener for the Start Button
+		startButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				logger.error("User pressed start button");
+				
+				//Get number of Players
+				//There are better ways to do this, but this solution seemed the simplest
+				//http://stackoverflow.com/questions/201287/how-do-i-get-which-jradiobutton-is-selected-from-a-buttongroup
+				int numberOfPlayers;
+				if (player1.isSelected()) {
+					logger.error("1 Player game is the active radio button");
+					numberOfPlayers = 1;
+				}
+				else if( player2.isSelected()) {
+					logger.error("2 Player game is the active radio button");
+					numberOfPlayers = 2;
+				}
+				else if( player3.isSelected()) {
+					logger.error("3 Player game is the active radio button");
+					numberOfPlayers = 3;
+				}
+				else if( player4.isSelected()) {
+					logger.error("4 Player game is the active radio button");
+					numberOfPlayers = 4;
+				}
+				else {
+					logger.fatal("User pressed start game, but no radio button was selected for number of players");
+					throw new IllegalStateException("User pressed start game, but no radio button was selected for number of players");
+				}
+				
+				//Get Game Mode
+				//TODO: Implement game mode
+				
+				SnakeGame.setupGame(numberOfPlayers, 0, baudRate.getText(), theCube.getSerialBaudrate() );
+				
+				//Set mode to unpaused
+				SnakeGame.startGame();
+				
+			}
+		});
+		
 
-	}
+	}//end SnakeGui() Constructor
 
 
 
-}
+}//end SnakeGui Class

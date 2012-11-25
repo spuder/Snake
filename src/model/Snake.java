@@ -13,7 +13,6 @@ import controller.ConvertLedType;
  */
 public class Snake extends Game
 {
-	public Logger logger = Logger.getLogger(this.getClass() );
     
 	private int color;
 	private int length;

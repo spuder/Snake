@@ -20,7 +20,7 @@ public class Game extends SnakeGame{
 	public Logger logger = Logger.getLogger(this.getClass());
 
 	private int numberOfPlayers;
-	private int cubeType;
+
 	private int gameMode;
 	private boolean gamePaused;
 
@@ -32,17 +32,13 @@ public class Game extends SnakeGame{
 	 */
 	public Game() {
 		this.numberOfPlayers = 1;
-		this.cubeType = cubeType;
-		;
 		this.gameMode = gameMode;
 		this.gamePaused = true;
 	}
 
-	public Game(int numberOfPlayers, int cubeType, int gameMode) {
+	public Game(int numberOfPlayers, int gameMode) {
 
 		this.numberOfPlayers = numberOfPlayers;
-		this.cubeType = cubeType;
-		;
 		this.gameMode = gameMode;
 		this.gamePaused = true;
 
@@ -88,7 +84,7 @@ public class Game extends SnakeGame{
 
 			aReusableSnake = new model.Snake(playerOneColor,
 					playerOneDirection, playerOneBodyPositions, playerOneSpeed);
-			// No real need to specify this. but I like verbosity in code
+			// No real need to specify "this." but I like verbosity in code
 			this.aListOfSnakes.add(aReusableSnake);
 
 		}
@@ -113,7 +109,7 @@ public class Game extends SnakeGame{
 			logger.info("Creating snake #3 of " + NumberOfSnakesToCreate);
 			// Create 4 snake objects, the 4 players are hard coded
 			int playerThreeColor = controller.ConvertLedType.hexToInt("FF00FF");
-			int playerThreeDirection = 0; // Snake is traveling north
+			int playerThreeDirection = 1; // Snake is traveling east
 			ArrayList<Integer> playerThreeBodyPositions = new ArrayList<Integer>();
 			playerThreeBodyPositions.add(3840);
 			playerThreeBodyPositions.add(3841);
@@ -130,7 +126,7 @@ public class Game extends SnakeGame{
 			logger.info("Creating snake #4 of " + NumberOfSnakesToCreate);
 			// Create 4 snake objects, the 4 players are hard coded
 			int playerFourColor = controller.ConvertLedType.hexToInt("FF0000");
-			int playerFourDirection = 0; // Snake is traveling north
+			int playerFourDirection = 2; // Snake is traveling south
 			ArrayList<Integer> playerFourBodyPositions = new ArrayList<Integer>();
 			playerFourBodyPositions.add(3855);
 			playerFourBodyPositions.add(3601);
@@ -147,6 +143,8 @@ public class Game extends SnakeGame{
 		if (NumberOfSnakesToCreate < 1 || NumberOfSnakesToCreate > 4) {
 			// controller.SnakeGame.logger.fatal("Game.createSnakes can only receive numbers between 1 and 4, received: "
 			// + NumberOfSnakesToCreate);
+			logger.fatal("Game.createSnakes can only receive numbers between 1 and 4, received: "
+							+ NumberOfSnakesToCreate);
 			throw new IllegalArgumentException(
 					"Game.createSnakes can only receive numbers between 1 and 4, received: "
 							+ NumberOfSnakesToCreate);
@@ -350,6 +348,14 @@ public class Game extends SnakeGame{
 			return false;
 		}
 
+	}
+
+	/**
+	 * Returns the number of players in the game
+	 * @return number of players
+	 */
+	public int getNumberOfPlayers() {
+		return numberOfPlayers;
 	}
 
 }

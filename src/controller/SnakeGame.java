@@ -1,22 +1,18 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import cubeTypes.AdaptiveCube;
 import cubeTypes.HypnoCube;
 import cubeTypes.SeekwayCube;
 
-import jssc.SerialPort;
-import jssc.SerialPortException;
 
-public class SnakeGame extends Object{
+
+public class SnakeGame {
 	// Create a log4j instance
 	public static Logger logger = Logger.getLogger(SnakeGame.class);
 	
@@ -25,6 +21,8 @@ public class SnakeGame extends Object{
 	public static List<String> 			aLIstOfSerialPorts;
 	
 	public static String activeCubeType;
+	
+	static model.Game aGame;
 	
 
 	public static void main(String[] args) {
@@ -52,43 +50,42 @@ public class SnakeGame extends Object{
 		
 
 		view.SnakeGui theGui = new view.SnakeGui();
-
-
-		model.Game aGame = new model.Game();
 		
 		//This is not needed since it is set when the gui is created
 //		activeCubeType = "Adaptive Cube";
 
-		String numberOfPlayers = "4";
-		int numberOfPlayersToInt = Integer.parseInt(numberOfPlayers);
-
-		logger.info("Creating " + numberOfPlayers + " snakes");
-		aGame.createSnakes(numberOfPlayersToInt);
-
-		logger.info("Creating " + numberOfPlayers + " apples");
-		for (model.Snake aSnake : aGame.getaListOfSnakes()) {
-			int snakeColor = aSnake.getColor();
-			aGame.createApple(snakeColor);
-			logger.debug("Creating Apple with color " + snakeColor);
-
-		}
+//		String numberOfPlayers = "4";
+//		int numberOfPlayersToInt = Integer.parseInt(numberOfPlayers);
+//
+//		logger.info("Creating " + numberOfPlayers + " snakes");
+//		aGame.createSnakes(numberOfPlayersToInt);
+//
+//		logger.info("Creating " + numberOfPlayers + " apples");
+//		for (model.Snake aSnake : aGame.getaListOfSnakes()) {
+//			int snakeColor = aSnake.getColor();
+//			aGame.createApple(snakeColor);
+//			logger.debug("Creating Apple with color " + snakeColor);
+//
+//		}
 
 	}// end main
 
-	public static void setupGame() {
-		//First establish the cube type, Adaptive, Seekway ect..
-		//Get the attributes from the Cube and set CubeAttributes Class
-		
-		//Get all the available serial ports
-		//Set the proper serial port in the AdaptiveCube or Seekway Class
-
-		
+	public static void setupGame(	int numberOfPlayers, 
+								 	int gameMode, 
+								 	String serialPort, 
+								 	int serialBaudRate) {
+		logger.info("Creating new game");
+		aGame = new model.Game(numberOfPlayers, gameMode);
+		aGame.createSnakes(numberOfPlayers);
+		aGame.createApple(255);
+	
 	}
 
 	public static void startGame() {
 		//Create a new Game object with the parameters specified by the user
+		logger.info("Unpausing game");
+		aGame.setGamePaused(false);
 		
-
 	}
 
 	public static void showScores() {
@@ -98,9 +95,6 @@ public class SnakeGame extends Object{
 
 	/*
 	 * // TODO Create Game model.Game aGame = new model.Game();
-	 * 
-	 * 
-	 * 
 	 * 
 	 * ArrayList<Integer> snake1Position = new ArrayList<Integer>();
 	 * logger.info("Created snake1Position"); snake1Position.add(13);
