@@ -14,7 +14,7 @@ public class AdaptiveCube implements SerialInterface  {
 	int zNumberOfLeds 	= 16;
 	int base0or1 		= 1; // Some cubes consider 1,1,1 the origin, others consider
 						// 0,0,0 the origin
-	String comPort;
+
 
 	public AdaptiveCube() {
 
@@ -30,13 +30,6 @@ public class AdaptiveCube implements SerialInterface  {
 		return base0or1;
 	}
 	
-	public String getComPort() {
-		return comPort;
-	}
-	
-	public void setComPort(String comPort) {
-		this.comPort = comPort;
-	}
 
 	public void writeToSerial(List ledsToWrite) {
 		// TODO Auto-generated method stub

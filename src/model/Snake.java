@@ -11,8 +11,9 @@ import controller.ConvertLedType;
  * @author Spencer Owen 
  * @version 1.0
  */
-public class Snake extends Game
-{
+public class Snake extends Game {
+	public Logger logger = Logger.getLogger(this.getClass() );
+	
     
 	private int color;
 	private int length;
@@ -95,7 +96,7 @@ public class Snake extends Game
 
 
 	public void setLength(int length) {
-		//TODO: This should not be negative, or greater than the number of leds per cube (4096) in our case;
+		//TODO: A snake length should never be negative, or greater than the number of leds per cube
 		this.length = length;
 	}
 
@@ -108,7 +109,7 @@ public class Snake extends Game
 
 
 	public void setSpeed(int speed) {
-		//TODO:This should not be negative
+		//TODO:This should not be negative, or 0
 		this.speed = speed;
 	}
 

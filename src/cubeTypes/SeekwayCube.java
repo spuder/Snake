@@ -32,17 +32,6 @@ public class SeekwayCube implements SerialInterface {
 		return null;
 	}
 
-	@Override
-	public String getComPort() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setComPort(String comPort) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public int getxNumberOfLeds() {

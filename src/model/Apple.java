@@ -8,41 +8,21 @@ package model;
  */
 public class Apple
 {
-    // xPosition is position in row, 0 - 15
-    private int xPosition;
-    
-    // yPosition is hight from ground, 0 - 15
-    private int yPosition;
-    
-    // zPosition is the depth from front of cube, 0 - 15
-    private int zPosition;
     
     //Absolute position is derived from the x y z. 15,15,15 would be 4095, 0,1,0 would be 16
     private int absolutePosition;
 
-    //Every apple has a color, needed for multiplier mode
-    private int color;
+    //Every apple has a color, the color associates it with a snake
+    private int appleColor;
     
-    /**
-     * Constructor for objects of class Apple
-     */
-    public Apple( int xPosition, int yPosition, int zPosition, int color )
-    {
-        // Initialize instance variables
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
-        this.zPosition = zPosition; 
-        this.color = color;
-    }
+    //Allow for game mode where apples disappear after a while
+    private long appleCreationTime;
     
-    public Apple( int absolutePosition, int color )
+    public Apple( int absolutePosition, int appleColor )
     {
-        // Take the absolute location and convert it to realtive
-//        this.xPosition = absolutePosition * 0;
-//        this.yPosition = absolutePosition * 0 * 16;
-//        this.zPosition = absolutePosition * 0 * 16 * 16; 
         this.absolutePosition = absolutePosition;
-        this.color = color;
+        this.appleColor = appleColor;
+        this.appleCreationTime = System.currentTimeMillis();
     }
 
 
@@ -59,11 +39,21 @@ public class Apple
     }
 
 	public int getColor() {
-		return color;
+		return appleColor;
 	}
 
 	public void setColor(int color) {
-		this.color = color;
+		this.appleColor = color;
+	}
+
+
+	public long getAppleCreationTime() {
+		return appleCreationTime;
+	}
+
+
+	public void setAppleCreationTime(long appleCreationTime) {
+		this.appleCreationTime = appleCreationTime;
 	}
     
     

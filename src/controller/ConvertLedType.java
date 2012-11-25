@@ -127,7 +127,7 @@ public class ConvertLedType extends SnakeGame{
 		
 		/*
 		 * This formula was provided by Thomas and Desmond Makkugi 
-		 * L = n*n*x + n*y + 1 (it 
+		 * L = n*n*x + n*y + 1 
 		 */
 		int answerPart1 =  (zPosition  * (xNumberOfLedsPerRow * yNumberOfRowsPerPanel ) );
 		int answerPart2 =  (yPosition  * xNumberOfLedsPerRow );
@@ -182,19 +182,19 @@ public class ConvertLedType extends SnakeGame{
 	 * Some colors have 8 characters. The leading 2 characters represent the alpha channel in the color specturm. 
 	 * The alpha channel is not needed. 
 	 * 
-	 * @param color
+	 * @param sixOrEightDigitHexString
 	 * @return
 	 * @see intToHex
 	 */
-	public static int hexToInt(String color)
+	public static int hexToInt(String sixOrEightDigitHexString)
 	{
-		if (color.length() > 6)
+		if (sixOrEightDigitHexString.length() > 6)
 		{
-			color.substring(color.length() - 6);
+			sixOrEightDigitHexString.substring(sixOrEightDigitHexString.length() - 6);
 		}
 			
 		
-		return Integer.parseInt(color, 16);
+		return Integer.parseInt(sixOrEightDigitHexString, 16);
 	}
 	
 	/**Takes the number of leds per x y z and returns how many leds are in the cube

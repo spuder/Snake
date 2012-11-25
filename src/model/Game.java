@@ -11,21 +11,22 @@ import controller.SerialInterface;
 import controller.SnakeGame;
 
 /**
- * Game has a mode, a paused status, number of players and cube type
+ * Game is the working class that performs actions on snakes and apples
+ * 
  * 
  * @author Spencer Owen
  * @version 1.0
  */
-public class Game extends SnakeGame{
+public class Game extends SnakeGame {
 	public Logger logger = Logger.getLogger(this.getClass());
 
 	private int numberOfPlayers;
-
 	private int gameMode;
 	private boolean gamePaused;
 
-	public List<Apple> aListOfApples = new ArrayList<Apple>();
-	public List<Snake> aListOfSnakes = new ArrayList<Snake>();
+
+	protected List<Apple> aListOfApples = new ArrayList<Apple>();
+	protected List<Snake> aListOfSnakes = new ArrayList<Snake>();
 
 	/**
 	 * Constructor for objects of class Game
@@ -37,11 +38,9 @@ public class Game extends SnakeGame{
 	}
 
 	public Game(int numberOfPlayers, int gameMode) {
-
 		this.numberOfPlayers = numberOfPlayers;
 		this.gameMode = gameMode;
 		this.gamePaused = true;
-
 	}
 
 	public boolean isGamePaused() {
@@ -170,9 +169,9 @@ public class Game extends SnakeGame{
 		// //Get the highest number in the Arena and generate a random number
 		// less than it
 		int maximumLed = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube() - 1;
-		// logger.debug("Maximum led = " + maximumLed + ", Arena.xMaximum="+
-		// CubeAttributes.xNumberOfLedsPerRow-1 +", Arena.yMaximum="+
-		// Arena.yMaximum + ", Arena.zMaximum="+ Arena.zMaximum);
+//		 logger.debug("Maximum led = " + maximumLed + ", Arena.xMaximum="+
+//		 CubeAttributes.xNumberOfLedsPerRow-1 +", Arena.yMaximum="+
+//		 Arena.yMaximum + ", Arena.zMaximum="+ Arena.zMaximum);
 
 		// Create a random number between 0 and the maximum number of LEDs
 		Random aRandomNumber = new Random();
@@ -194,7 +193,7 @@ public class Game extends SnakeGame{
 			// Look at every other apple in the arena and see if it is a
 			// duplicate
 			for (Apple otherApples : aListOfApples) {
-				// If
+				// If we have an apple collision, set collisionCheck to false;
 				if (temporaryAppleLocation == otherApples.getAbsolutePosition()) {
 					appleCollisionCheck = false;
 				}

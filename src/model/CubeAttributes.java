@@ -1,5 +1,9 @@
 package model;
 /*
+ * This class is no longer needed. Will delete in final release
+ * 
+ * 
+ * 
 //import controller.ConvertLedType;
 
 public class CubeAttributes {

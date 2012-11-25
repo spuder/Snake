@@ -13,7 +13,7 @@ public class HypnoCube implements SerialInterface {
 	int zNumberOfLeds 	= 8;
 	int base0or1 		= 0; // Some cubes consider 1,1,1 the origin, others consider
 						// 0,0,0 the origin
-	String comPort;
+
 	
 
 	public int getSerialBaudrate() {
@@ -37,17 +37,6 @@ public class HypnoCube implements SerialInterface {
 		return null;
 	}
 
-	@Override
-	public String getComPort() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setComPort(String comPort) {
-		// TODO Auto-generated method stub
-
-	}
 
 
 	@Override

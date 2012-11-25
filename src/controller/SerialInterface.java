@@ -35,20 +35,20 @@ public interface SerialInterface
 	 */
 	List getCurrentCubeDisplay();
 	
-	/**
-	 * Returns the current com port
-	 * Example would be "/dev/tty/Arduino0" or "COM3"
-	 * @return The String representation of the com port
-	 */
-	String getComPort();
-	
-	/**
-	 * Sets the currently used com port
-	 * Example would be "/dev/tty/Arduino0" or "COM3"
-	 * 
-	 */
-	void setComPort(String comPort);
-	
+//	/**
+//	 * Returns the current com port
+//	 * Example would be "/dev/tty/Arduino0" or "COM3"
+//	 * @return The String representation of the com port
+//	 */
+//	String getComPort();
+//	
+//	/**
+//	 * Sets the currently used com port
+//	 * Example would be "/dev/tty/Arduino0" or "COM3"
+//	 * 
+//	 */
+//	void setComPort(String comPort);
+//	
 	/**
 	 * Returns the number of Leds in the x plane
 	 * @return numberOfLeds
