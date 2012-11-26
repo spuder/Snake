@@ -16,7 +16,7 @@ public class SnakeGame {
 	// Create a log4j instance
 	public static Logger logger = Logger.getLogger(SnakeGame.class);
 	
-	
+	//TODO: Should this be static and public?
 	public static Map<String, Object> 	aListOfCubeTypes;
 	public static List<String> 			aLIstOfSerialPorts;
 	
@@ -75,6 +75,7 @@ public class SnakeGame {
 								 	String serialPort, 
 								 	int serialBaudRate) {
 		logger.info("Creating new game");
+		aGame = null;
 		aGame = new model.Game(numberOfPlayers, gameMode);
 		aGame.createSnakes(numberOfPlayers);
 		aGame.createApple(255);
@@ -85,6 +86,28 @@ public class SnakeGame {
 		//Create a new Game object with the parameters specified by the user
 		logger.info("Unpausing game");
 		aGame.setGamePaused(false);
+		
+		boolean anyPlayerStillAlive = true;
+		
+		do {
+
+			for(model.Snake atempSnake : aGame.getaListOfSnakes() ) {
+
+				if ( aGame.checkTimeout(atempSnake) == true ) {
+					atempSnake.advanceForward();
+					System.out.println("Snake " + atempSnake.getColor() + " is now at " + atempSnake.getBodyPositions().get(0) ); 
+					System.out.println("");
+					
+					if ( atempSnake.appleCheck() == true ) {
+						atempSnake.setScore(100);
+						logger.error("Added 100 points to snake " + atempSnake.getColor() );
+					}
+					
+				}//end checkTimeout
+				
+			}
+			
+		}while (anyPlayerStillAlive == true);
 		
 	}
 

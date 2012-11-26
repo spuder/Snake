@@ -301,12 +301,14 @@ public class Snake extends Game {
 		
 	}
 	
-	public void appleCheck()
+	public boolean appleCheck()
 	{
 		ArrayList<Integer> anArray = this.getBodyPositions();
 		
 		int headPosition = anArray.get(0);
 		System.out.println("headposition is " + headPosition);
+		
+		boolean appleFound = false;
 		
 		//aListOfApples is actually a field in the parent here we set the size
 		int numberOfApples = aListOfApples.size();
@@ -317,30 +319,13 @@ public class Snake extends Game {
 		{
 			if ( aListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
 			{
-				logger.error("Cannot create an apple where another apple already exists, statistically this happens once every 4095 apples");
-				
-				//Check to see if we got our own apple or someone else's
-				if(aListOfApples.get(numberOfApples).getColor() != this.getColor() )
-				{
-					logger.info("Snake "+ this.getColor() + " hit the apple " + aListOfApples.get(numberOfApples).getColor() +" which belongs to someone else");
-					//Add 100 points to the score;
-					this.setScore(100);
-					
-				}
-				else 
-					this.setScore(200);
-				
-				
-					//TODO:Delete the Apple
-	
+				logger.error("Snake " + this.getColor() + " found an apple ");
+				appleFound = true;
 			}
-			else
-			{
-				System.out.println("Didn't find an apple here");
-			}
-			System.out.println("We have finished evaluating stuff");
-			System.out.println("" );
-		}
+
+		}//end for loop checking each apple
+		
+		return appleFound;
 		
 	}// end appleCheck
 	

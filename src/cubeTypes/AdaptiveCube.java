@@ -44,19 +44,16 @@ public class AdaptiveCube implements SerialInterface  {
 
 
 	public int getxNumberOfLeds() {
-		// TODO Auto-generated method stub
 		return xNumberOfLeds;
 	}
 
 
 	public int getyNumberOfLeds() {
-		// TODO Auto-generated method stub
 		return yNumberOfLeds;
 	}
 
 
 	public int getzNumberOfLeds() {
-		// TODO Auto-generated method stub
 		return zNumberOfLeds;
 	}
 
