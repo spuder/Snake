@@ -1,5 +1,6 @@
 package model;
 import java.util.ArrayList; 
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -301,23 +302,36 @@ public class Snake extends Game {
 		
 	}
 	
-	public boolean appleCheck()
+	/**
+	 * Returns true if an apple shares the location of the head of the snake
+	 * 
+	 * @param aLocalListOfApples
+	 * @return
+	 */
+	public boolean appleCheck(List<Apple> aLocalListOfApples )
 	{
 		ArrayList<Integer> anArray = this.getBodyPositions();
 		
 		int headPosition = anArray.get(0);
-		System.out.println("headposition is " + headPosition);
+		logger.debug("Snake " + this.getColor() + " headposition is " + headPosition);
+	
 		
 		boolean appleFound = false;
 		
 		//aListOfApples is actually a field in the parent here we set the size
-		int numberOfApples = aListOfApples.size();
-		logger.debug("numberOfApples is now: "+ numberOfApples);
+//		int numberOfApples = aListOfApples.size();
+		int numberOfApples = aLocalListOfApples.size();
+//		List<Apple> temporaryListOfApples = super.getaListOfApples();
+//		int numberOfApples = temporaryListOfApples.size();
+		
+		//TODO:This is always saying the list is 0 long, not sure why?
+		//http://stackoverflow.com/questions/13639171/pass-by-reference-stumps-newbie
+		logger.debug("numberOfApples is: "+ aLocalListOfApples.size() );
 		
 
-		for ( numberOfApples = aListOfApples.size() - 1; numberOfApples >=0; numberOfApples--)
+		for ( numberOfApples = aLocalListOfApples.size() - 1; numberOfApples >=0; numberOfApples--)
 		{
-			if ( aListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
+			if ( aLocalListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
 			{
 				logger.error("Snake " + this.getColor() + " found an apple ");
 				appleFound = true;

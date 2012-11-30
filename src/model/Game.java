@@ -234,9 +234,10 @@ public class Game extends SnakeGame {
 		logger.info("Added a new apple with color:  " + appleColor
 				+ " at location: " + temporaryAppleLocation);
 		//Add the newly created apple to the array
-		aListOfApples.add(anApple);
+		this.aListOfApples.add(anApple);
+		logger.debug("There are currently "+  aListOfApples.size() + " apples in aListOfApples");
 
-	}
+	}//end createApple
 
 	
 	/**

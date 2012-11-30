@@ -77,9 +77,16 @@ public class SnakeGame {
 		logger.info("Creating new game");
 		aGame = null;
 		aGame = new model.Game(numberOfPlayers, gameMode);
-		aGame.createSnakes(numberOfPlayers);
+
+		//Create a bunch of apples for testing
 		aGame.createApple(255);
+		aGame.createApple(1);
+		aGame.createApple(2);
+		aGame.createApple(3);
+		aGame.createApple(4);
+		aGame.createApple(5);
 	
+		aGame.createSnakes(numberOfPlayers);
 	}
 
 	public static void startGame() {
@@ -98,14 +105,40 @@ public class SnakeGame {
 					System.out.println("Snake " + atempSnake.getColor() + " is now at " + atempSnake.getBodyPositions().get(0) ); 
 					System.out.println("");
 					
-					if ( atempSnake.appleCheck() == true ) {
+					logger.debug("Searching entire arrayList to see if snake has eaten apple");
+					if ( atempSnake.appleCheck( aGame.getaListOfApples() ) == true ) {
 						atempSnake.setScore(100);
 						logger.error("Added 100 points to snake " + atempSnake.getColor() );
-					}
+
+						//Find the apple, delete it and create a new one
+						for(model.Apple appleToDestroy : aGame.getaListOfApples() ) {
+							logger.debug("In for loop checking apple " + appleToDestroy.getColor() );
+							
+							//See if the current snake head location is the same as an apple location
+							if ( appleToDestroy.getAbsolutePosition() == atempSnake.getBodyPositions().get(0) ) {
+								logger.debug("Snake has found an apple at " + appleToDestroy.getAbsolutePosition() );
+								
+								//Save the color of the apple to destroy for when we create a new one
+								int appleColor = appleToDestroy.getColor();
+								logger.debug("About to delete the apple with color " + appleColor);
+								
+								
+								//Remove the apple from the arrayList 
+								aGame.destroyApple(appleToDestroy);
+								
+								//Create a new apple
+								aGame.createApple(appleColor);	
+								
+								//No need to add the apple to the array since that is handled in the createApple method
+							}
+							
+						}//end for each apple loop
+
+					}//end if snake.applecheck == true
 					
 				}//end checkTimeout
 				
-			}
+			}//end for each snake loop
 			
 		}while (anyPlayerStillAlive == true);
 		
