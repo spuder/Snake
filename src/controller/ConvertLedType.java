@@ -171,6 +171,9 @@ public class ConvertLedType extends SnakeGame{
 		if (answer.length() > 6)
 			answer.substring(answer.length() - 6);
 		return answer.toUpperCase();	
+		
+		//TODO: strings starting with 00 are truncated, 00FF00 returns just FF00, see github issue #1
+		
 
 	}
 	

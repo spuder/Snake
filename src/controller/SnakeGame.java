@@ -78,15 +78,19 @@ public class SnakeGame {
 		aGame = null;
 		aGame = new model.Game(numberOfPlayers, gameMode);
 
+		String redHex 		= "FF0000";
+		String blueHex 		= "0000FF";
+		String greenHex 	= "00FF00";
+		String purpleHex 	= "FF00FF";
+		
 		//Create a bunch of apples for testing
-		aGame.createApple(255);
-		aGame.createApple(1);
-		aGame.createApple(2);
-		aGame.createApple(3);
-		aGame.createApple(4);
-		aGame.createApple(5);
+		aGame.createApple( ConvertLedType.hexToInt( redHex ) );
+		aGame.createApple( ConvertLedType.hexToInt( blueHex ) );
+		aGame.createApple( ConvertLedType.hexToInt( greenHex ) );
+		aGame.createApple( ConvertLedType.hexToInt( purpleHex ) );
+
 	
-		aGame.createSnakes(numberOfPlayers);
+		aGame.createSnakes( numberOfPlayers );
 	}
 
 	public static void startGame() {
@@ -149,44 +153,6 @@ public class SnakeGame {
 	}
 
 
-	/*
-	 * // TODO Create Game model.Game aGame = new model.Game();
-	 * 
-	 * ArrayList<Integer> snake1Position = new ArrayList<Integer>();
-	 * logger.info("Created snake1Position"); snake1Position.add(13);
-	 * logger.info("added 13 to snake1Position arrayList");
-	 * snake1Position.add(14);
-	 * logger.info("added 14 to snake1Position arrayList");
-	 * snake1Position.add(15);
-	 * logger.info("added 15 to snake1Position arrayList");
-	 * 
-	 * 
-	 * ArrayList<Integer> snake2Position = new ArrayList<Integer>();
-	 * snake2Position.add(4093); snake2Position.add(4094);
-	 * snake2Position.add(4095);
-	 * 
-	 * 
-	 * model.Snake aSnake = new model.Snake(255,3, snake1Position, 1000);
-	 * model.Snake aSnake2 = new model.Snake(115,3, snake2Position, 500);
-	 * 
-	 * 
-	 * Arena.createApple(); // Arena.createApple(); SnakeController
-	 * aSnakeController = new SnakeController();
-	 * 
-	 * 
-	 * //Check to see if it is time to take action if (
-	 * aSnakeController.checkTimeout(aSnake) == true) {
-	 * aSnakeController.advanceForward(aSnake);
-	 * aSnakeController.appleCheck(aSnake); //
-	 * aSnakeController.wallCheck(aSnake); //
-	 * aSnakeController.bodyCheck(aSnake); }
-	 * 
-	 * //Check to see if it is time to take action if (
-	 * aSnakeController.checkTimeout(aSnake2) == true) {
-	 * aSnakeController.advanceForward(aSnake2);
-	 * aSnakeController.appleCheck(aSnake2); //
-	 * aSnakeController.wallCheck(aSnake2); //
-	 * aSnakeController.bodyCheck(aSnake2); }
-	 */
+
 
 }

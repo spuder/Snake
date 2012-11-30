@@ -306,25 +306,21 @@ public class Snake extends Game {
 	 * Returns true if an apple shares the location of the head of the snake
 	 * 
 	 * @param aLocalListOfApples
-	 * @return
+	 * @return true/false
 	 */
 	public boolean appleCheck(List<Apple> aLocalListOfApples )
 	{
 		ArrayList<Integer> anArray = this.getBodyPositions();
 		
 		int headPosition = anArray.get(0);
-		logger.debug("Snake " + this.getColor() + " headposition is " + headPosition);
+		logger.debug("Snake " + ConvertLedType.intToHex( this.getColor() ) + " (" + this.getColor() + ") headposition is " + headPosition);
 	
 		
 		boolean appleFound = false;
 		
-		//aListOfApples is actually a field in the parent here we set the size
-//		int numberOfApples = aListOfApples.size();
 		int numberOfApples = aLocalListOfApples.size();
-//		List<Apple> temporaryListOfApples = super.getaListOfApples();
-//		int numberOfApples = temporaryListOfApples.size();
 		
-		//TODO:This is always saying the list is 0 long, not sure why?
+		//Resolved: This was always saying the list is 0 long, wasnt sure why
 		//http://stackoverflow.com/questions/13639171/pass-by-reference-stumps-newbie
 		logger.debug("numberOfApples is: "+ aLocalListOfApples.size() );
 		
@@ -333,7 +329,7 @@ public class Snake extends Game {
 		{
 			if ( aLocalListOfApples.get(numberOfApples).getAbsolutePosition() == headPosition )
 			{
-				logger.error("Snake " + this.getColor() + " found an apple ");
+				logger.error("** Snake " + this.getColor() + " found an apple at " + headPosition + " ****");
 				appleFound = true;
 			}
 
