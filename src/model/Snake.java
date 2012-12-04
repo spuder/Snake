@@ -32,7 +32,7 @@ public class Snake extends Game {
 	private int travelDirection;
 	private int score;
 	private ArrayList<Integer> bodyPositions;
-	private boolean alive;
+	private boolean aliveStatus;
 
 
 
@@ -50,7 +50,7 @@ public class Snake extends Game {
     	this.travelDirection = travelDirection;
     	this.score = 0;
     	this.bodyPositions = bodyPositions;
-    	this.alive = true;
+    	this.aliveStatus = true;
         
     }
 
@@ -68,7 +68,7 @@ public class Snake extends Game {
     	this.travelDirection = travelDirection;
     	this.score = 0;
     	this.bodyPositions = bodyPositions;
-    	this.alive = true;
+    	this.aliveStatus = true;
         
     }
 
@@ -205,18 +205,18 @@ public class Snake extends Game {
 	/**
 	 * Returns true if user is alive, false if user is dead
 	 * 
-	 * @return alive
+	 * @return aliveStatus
 	 */
 	public boolean isAlive() {
-		return alive;
+		return aliveStatus;
 	}
 
 
 
-	public void setAlive(boolean alive) {
+	public void setAlive(boolean aliveStatus) {
 		//TODO: if we try and set the state to a state we are already in, we should log it
 		
-		this.alive = alive;
+		this.aliveStatus = aliveStatus;
 	}
 
 	public long getLastMoveTime() {

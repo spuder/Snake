@@ -7,14 +7,16 @@ import jssc.SerialPortList;
 
 public class AdaptiveCube implements SerialInterface  {
 
-	int serialBaudRate 	= 11520;
-	int ledsPerCube 	= 4096;
-	int xNumberOfLeds 	= 16;
-	int yNumberOfLeds 	= 16;
-	int zNumberOfLeds 	= 16;
-	int base0or1 		= 1; // Some cubes consider 1,1,1 the origin, others consider
+	private int serialBaudRate 	= 11520;
+	private int ledsPerCube 	= 4096;
+	private int xNumberOfLeds 	= 16;
+	private int yNumberOfLeds 	= 16;
+	private int zNumberOfLeds 	= 16;
+	private int base0or1 		= 1; // Some cubes consider 1,1,1 the origin, others consider
 						// 0,0,0 the origin
-
+	private List currentCubeDisplay;
+	
+	
 
 	public AdaptiveCube() {
 
@@ -32,13 +34,15 @@ public class AdaptiveCube implements SerialInterface  {
 	
 
 	public void writeToSerial(List ledsToWrite) {
-		// TODO Auto-generated method stub
+		//Take each item in array
+		//Construct a message
+		//Send over Serial
+		
 
 	}
 
 	public List getCurrentCubeDisplay() {
-		// TODO Auto-generated method stub
-		return null;
+		return currentCubeDisplay;
 	}
 
 
