@@ -15,5 +15,5 @@ Seekway Cube
 
 
 
-![Gui Window](https://github.com/spudstud/Snake/raw/master/Screenshots/gui.png)
+![Gui Window](https://github.com/spudstud/Snake/raw/master/img/gui.png)
 ![solarized vim](https://github.com/altercation/solarized/raw/master/img/solarized-vim.png)
