@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import cubeTypes.AdaptiveCube;
 import cubeTypes.HypnoCube;
 import cubeTypes.SeekwayCube;
+import org.lwjgl.input.Controller;
+import org.lwjgl.input.Controllers;
 
 
 
@@ -18,11 +20,15 @@ public class SnakeGame {
 	
 	//TODO: Should this be static and public?
 	public static Map<String, Object> 	aListOfCubeTypes;
-	public static List<String> 			aLIstOfSerialPorts;
+	public static List<String>              aLIstOfSerialPorts;
 	
 	public static String activeCubeType;
 	
 	static model.Game aGame;
+        
+        static view.SnakeGui theGui;
+        
+        static Controller aController;
 	
 
 	public static void main(String[] args) {
@@ -45,11 +51,25 @@ public class SnakeGame {
 		 */
 		aListOfCubeTypes = new HashMap<String, Object>();
 		aListOfCubeTypes.put("Adaptive Cube",	new AdaptiveCube() 	);
-		aListOfCubeTypes.put("Hypno Cube", 		new HypnoCube() 	);
+		aListOfCubeTypes.put("Hypno Cube", 	new HypnoCube() 	);
 		aListOfCubeTypes.put("Seekway Cube",  	new SeekwayCube() 	);
 		
-
-		view.SnakeGui theGui = new view.SnakeGui();
+                /*
+                 * Create a Controllers Object
+                 * A Controllers is a collection of Controller
+                 * Contains a list of all the gamepads on system
+                */
+                try {
+                    Controllers.create();
+                }catch (
+                    Exception e) {
+                    logger.fatal("Unable to create Controllers Object, Likely JInput not found");
+                    e.printStackTrace();
+                } 
+                logger.warn("Found " + Controllers.getControllerCount() + " controllers on system");
+                
+                    
+		theGui = new view.SnakeGui();
 		
 		//This is not needed since it is set when the gui is created
 //		activeCubeType = "Adaptive Cube";
@@ -71,9 +91,10 @@ public class SnakeGame {
 	}// end main
 
 	public static void setupGame(	int numberOfPlayers, 
-								 	int gameMode, 
-								 	String serialPort, 
-								 	int serialBaudRate) {
+                                        int gameMode, 
+                                        String serialPort, 
+                                        int serialBaudRate) {
+            
 		logger.info("Creating new game");
 		aGame = null;
 		aGame = new model.Game(numberOfPlayers, gameMode);
@@ -98,12 +119,38 @@ public class SnakeGame {
 		logger.info("Unpausing game");
 		aGame.setGamePaused(false);
 		
-		boolean anyPlayerStillAlive = true;
-		
+                boolean anyPlayerStillAlive = true;
+                
+                //Hide the setup Gui when starting the game
+                theGui.setVisible(false);
+                
+                
+                
+                //As long as there is a player still alive, loop this code
 		do {
-
+                    
+                    //Update information for every controller in system
+                     Controllers.poll();
+                     
+                     while (Controllers.next()) {
+                        //Controller number
+                        int controllerNumber =  Controllers.getEventSource().getIndex();
+                        //Button number
+                        int buttonNumber     = Controllers.getEventControlIndex();
+                        /*
+                         * Pressing a button on an xBox controller slightly alters the analog values
+                         * This causes multiple unwanted events on button push
+                         * By checking to see if the event was a button we can strip out the uneeded events
+                         */
+                        if ( Controllers.isEventButton() == true ) {
+                         handleButtonPush( controllerNumber, buttonNumber, aGame.getaListOfSnakes() );  
+                        }
+                         
+                     }
+                        //Look at each snake
 			for(model.Snake atempSnake : aGame.getaListOfSnakes() ) {
 
+                                //See if it is time to update the snake
 				if ( aGame.checkTimeout(atempSnake) == true ) {
 					atempSnake.advanceForward();
 					System.out.println("Snake " + atempSnake.getColor() + " is now at " + atempSnake.getBodyPositions().get(0) ); 
@@ -145,12 +192,55 @@ public class SnakeGame {
 			}//end for each snake loop
 			
 		}while (anyPlayerStillAlive == true);
+                
+                //TODO: Show gui when game over
+                theGui.setVisible(true);
+                
 		
 	}
 
 	public static void showScores() {
 
 	}
+        
+        
+         /**
+        * Converts the button number, to the game event
+        * Example: Pressing button 3 on controller means player turns right
+        * This is pro propritary to xbox controllers and snake game
+        * 
+        * @param controllerNumber The number of the controller, starts at 0
+        * @param buttonNumber The button number on the controller usually 0 - 22
+        */
+        public static void handleButtonPush( int controllerNumber, int buttonNumber , List<model.Snake> aListOfSnakes) {
+
+            // System.out.println("Controller " + controllerNumber + " button " + buttonNumber);
+            for (model.Snake aSnake : aListOfSnakes ) {
+              
+                if ( aSnake.getControllerNumber() == controllerNumber ) {
+                  
+                    switch (buttonNumber) {
+
+                    case 0: logger.debug("User " + controllerNumber + " turned North");
+                            aSnake.setTravelDirection(0);
+                        break;
+                    case 1: logger.debug("User " + controllerNumber + " turned South");
+                            aSnake.setTravelDirection(2);
+                        break;
+                    case 2: logger.debug("User " + controllerNumber + " turned West");
+                            aSnake.setTravelDirection(3);
+                        break;
+                    case 3: logger.debug("User " + controllerNumber + " turned East");
+                            aSnake.setTravelDirection(1);
+                        break;
+                    }//end switch buttonNumber
+                
+                }//end if controllernumber=
+
+            }//end for each snake
+                    
+                    
+        }//end handleButtonPush
 
 
 

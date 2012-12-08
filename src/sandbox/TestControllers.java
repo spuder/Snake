@@ -67,14 +67,21 @@ package sandbox;
 	        private int buttonCount;
 	        private int itemCount;
 	
+                //Constructor - Creates a Controller object for every controller detected
 	        public TestControllers(int index) {
+                    
+                        //Get the controller index from the Controllers group
 	                controller = Controllers.getController(index);
+                        //Gui LayoutManager
 	                setLayout(null);
 	
+                        //Get the number of buttons on the controller
 	                buttonCount = controller.getButtonCount();
-	                itemCount = controller.getButtonCount() + controller.getAxisCount() + 2;
-	                values = new JTextField[itemCount];
-	                names = new JTextField[itemCount];
+                        //Get the number of buttons + the number of hat pads
+	                itemCount   = controller.getButtonCount() + controller.getAxisCount() + 2;
+                        //Create a Gui Box for every button / hat pad
+	                values      = new JTextField[itemCount];
+	                names       = new JTextField[itemCount];
 	
 	                for (int i=0;i<controller.getButtonCount();i++) {
 	                        names[i] = new JTextField();
@@ -139,6 +146,10 @@ package sandbox;
 	                frame.setVisible(true);
 	        }
 	
+                /*
+                 * Updates the values of each button in the gui
+                 * 
+                 */
 	        public void updateDetails() {
 	                for (int i=0;i<controller.getButtonCount();i++) {
 	                        values[i].setText(""+controller.isButtonPressed(i));
@@ -152,13 +163,42 @@ package sandbox;
 	        }
                 
                 
-                
-                
+                /**
+                 * Converts the button number, to the game event
+                 * Example: Pressing button 3 on controller means player turns right
+                 * This is pro propritary to xbox controllers and snake game
+                 * 
+                 * @param controllerNumber The number of the controller, starts at 0
+                 * @param buttonNumber The button number on the controller usually 0 - 22
+                 */
+                public static void handleButtonPush( int controllerNumber, int buttonNumber ) {
+                    
+                   // System.out.println("Controller " + controllerNumber + " button " + buttonNumber);
+                    
+                    switch (buttonNumber) {
+                        
+                        case 0: System.out.println("User " + controllerNumber + " turned North");
+                            break;
+                        case 1: System.out.println("User " + controllerNumber + " turned South");
+                            break;
+                        case 2: System.out.println("User " + controllerNumber + " turned West");
+                            break;
+                        case 3: System.out.println("User " + controllerNumber + " turned East");
+                            break;
+                            
+                        
+                            
+                    }
+                    
+                    
+                }
                 
                 
                 
 	
 	        public static void main(String[] argv) {
+                    
+                        //Create the environment of controllers
 	                try {
 	                        Controllers.create();
 	                } catch (Exception e) {
@@ -197,12 +237,36 @@ package sandbox;
                                 
                                 //Poll all the controllers
 	                        Controllers.poll();
-	
+                                
+                                /*
+                                 * Controllers have an event listener
+                                 * Whenever a button is pushed it add the event 
+                                 * it to the buffer of the controller instance
+                                 * As long as the buffer has something in it 
+                                 * we print it out                                 * 
+                                 */
 	                        while (Controllers.next()) {
-	                                System.out.println("Event Fired: ");
-	                                System.out.println("\t"+Controllers.getEventNanoseconds());
-	                                System.out.println("\t"+Controllers.getEventSource()+":"+Controllers.getEventControlIndex()+":"+Controllers.isEventButton());
-	                                System.out.println("\t"+Controllers.isEventXAxis()+":"+Controllers.isEventYAxis());
+//	                                System.out.println("Event Fired: ");
+//	                                System.out.println("\t"+Controllers.getEventNanoseconds());
+//	                                System.out.println("\t"+Controllers.getEventSource()+":"+Controllers.getEventControlIndex()+":"+Controllers.isEventButton());
+//	                                System.out.println("\t"+Controllers.isEventXAxis()+":"+Controllers.isEventYAxis());
+                                       
+                                    
+                                        //Controller number
+                                       int controllerNumber =  Controllers.getEventSource().getIndex();
+                                        //Button number
+                                       int buttonNumber     = Controllers.getEventControlIndex();
+                                       /*
+                                        * Pressing a button on an xBox controller slightly alters the analog values
+                                        * This causes multiple unwanted events on button push
+                                        * By checking to see if the event was a button we can strip out the uneeded events
+                                        */
+                                       if ( Controllers.isEventButton() == true ) {
+                                        handleButtonPush( controllerNumber, buttonNumber );  
+                                       }
+                                       
+                                        
+                                   
 	                        }
 	
 	                        for (int i=0;i<count;i++) {
@@ -210,4 +274,5 @@ package sandbox;
 	                        }
 	                }
 	        }//end main
-	}
+                
+	}//end Test Controllers

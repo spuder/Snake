@@ -267,6 +267,8 @@ public class SnakeGui extends JFrame {
 				//TODO: Implement game mode
 				
 				SnakeGame.setupGame(numberOfPlayers, 0, baudRate.getText(), theCube.getSerialBaudrate() );
+                                
+                                
 				
 				//Set mode to unpaused
 				SnakeGame.startGame();
@@ -278,5 +280,18 @@ public class SnakeGui extends JFrame {
 	}//end SnakeGui() Constructor
 
 
+        /**
+         * Sets the gui to visible/hidden depending on what variable is passed in. 
+         * true - The gui is shown
+         * false - The gui is hidden
+         * 
+         * Overrides setVisible in parent, JFrame
+         * @param toShowGui 
+         * 
+         */
+    @Override
+        public void setVisible(boolean visible) {
+            super.setVisible(visible);
+        }
 
 }//end SnakeGui Class

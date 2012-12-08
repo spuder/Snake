@@ -17,6 +17,7 @@ public class Snake extends Game {
 	
     
 	private int color;
+        private int controllerNumber;
 	private int length;
 	private int speed;
 	private long lastMoveTime;
@@ -39,12 +40,13 @@ public class Snake extends Game {
     /*
      * Constructor for objects of class Snake
      */
-    public Snake(int color, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
+    public Snake(int color, int controllerNumber, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
     {
     	logger.debug("Calling snake constructor with color = int (instead of string)" );
     	logger.info("Creating a Snake, color=" + color + " travelDirection=" + travelDirection );
     	this.color = color;
-    	this.length = 3;
+    	this.controllerNumber = controllerNumber;
+        this.length = 3;
     	this.speed = speed;
     	this.lastMoveTime = System.currentTimeMillis();
     	this.travelDirection = travelDirection;
@@ -54,7 +56,7 @@ public class Snake extends Game {
         
     }
 
-    public Snake(String color, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
+    public Snake(String color, int controllerNumber, int travelDirection, ArrayList<Integer> bodyPositions, int speed)
     {
     	logger.debug("Calling snake constructor with color = string (instead of int)" );
     	logger.info("Creating a Snake, color=" + color + " travelDirection=" + travelDirection );
@@ -62,7 +64,8 @@ public class Snake extends Game {
     	//Allow user to pass in "FFFFFF" and then convert it to the number
     	//integers are faster to compute than strings
     	this.color = ConvertLedType.hexToInt(color);
-    	this.length = 3;
+    	this.controllerNumber = controllerNumber;
+        this.length = 3;
     	this.speed = speed;
     	this.lastMoveTime = System.currentTimeMillis();
     	this.travelDirection = travelDirection;
@@ -88,7 +91,13 @@ public class Snake extends Game {
 		this.color = ConvertLedType.hexToInt(color);
 	}
 	
+        public void setControllerNumber(int controllerNumber) {
+            this.controllerNumber = controllerNumber;
+        }
 
+        public int getControllerNumber() {
+            return this.controllerNumber;
+        }
 
 	public int getLength() {
 		return length;
@@ -128,7 +137,7 @@ public class Snake extends Game {
 	 * 1 = east 	//x++
 	 * 2 = south 	//z--
 	 * 3 = west 	//x--
-	 * 4 = up 		//y++
+	 * 4 = up 	/y++
 	 * 5 = down 	//y--
 	 * 
 	 * The perspective is always from the front of the cube (0,0,0) 

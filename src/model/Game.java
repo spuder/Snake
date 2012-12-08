@@ -69,11 +69,14 @@ public class Game extends SnakeGame {
 
 	public void createSnakes(int NumberOfSnakesToCreate) {
 		model.Snake aReusableSnake;
+                
 
 		if (NumberOfSnakesToCreate >= 1) {
 			logger.info("Creating snake #1 of " + NumberOfSnakesToCreate);
 			// Create 4 snake objects, the 4 players are hard coded
 			int playerOneColor = controller.ConvertLedType.hexToInt("0000FF");
+                        //TODO: Player 1 is always hardcoded to controller 0, allow dnamic changing
+                        int playerOneGamePad = 0;
 			int playerOneDirection = 3; // Snake is traveling west
 			ArrayList<Integer> playerOneBodyPositions = new ArrayList<Integer>();
 			playerOneBodyPositions.add(13);
@@ -81,8 +84,11 @@ public class Game extends SnakeGame {
 			playerOneBodyPositions.add(15);
 			int playerOneSpeed = 750;
 
-			aReusableSnake = new model.Snake(playerOneColor,
-					playerOneDirection, playerOneBodyPositions, playerOneSpeed);
+			aReusableSnake = new model.Snake(   playerOneColor,
+                                                            playerOneGamePad,
+                                                            playerOneDirection, 
+                                                            playerOneBodyPositions, 
+                                                            playerOneSpeed);
 			// No real need to specify "this." but I like verbosity in code
 			this.aListOfSnakes.add(aReusableSnake);
 
@@ -92,14 +98,19 @@ public class Game extends SnakeGame {
 			logger.info("Creating snake #2 of " + NumberOfSnakesToCreate);
 			// Create 4 snake objects, the 4 players are hard coded
 			int playerTwoColor = controller.ConvertLedType.hexToInt("00FF00");
+                        //TODO: Player 2 is always hardcoded to controller 1, allow dnamic changing
+                        int playerTwoGamePad = 1;
 			int playerTwoDirection = 0; // Snake is traveling north
 			ArrayList<Integer> playerTwoBodyPositions = new ArrayList<Integer>();
 			playerTwoBodyPositions.add(512);
 			playerTwoBodyPositions.add(256);
 			playerTwoBodyPositions.add(0);
 			int playerTwoSpeed = 750;
-			aReusableSnake = new model.Snake(playerTwoColor,
-					playerTwoDirection, playerTwoBodyPositions, playerTwoSpeed);
+			aReusableSnake = new model.Snake(   playerTwoColor,
+                                                            playerTwoGamePad,
+                                                            playerTwoDirection,    
+                                                            playerTwoBodyPositions, 
+                                                            playerTwoSpeed);
 			this.aListOfSnakes.add(aReusableSnake);
 
 		}
@@ -108,15 +119,19 @@ public class Game extends SnakeGame {
 			logger.info("Creating snake #3 of " + NumberOfSnakesToCreate);
 			// Create 4 snake objects, the 4 players are hard coded
 			int playerThreeColor = controller.ConvertLedType.hexToInt("FF00FF");
+                        //TODO: Player 3 is always hardcoded to controller 2, allow dnamic changing
+                        int playerThreeGamePad = 2;
 			int playerThreeDirection = 1; // Snake is traveling east
 			ArrayList<Integer> playerThreeBodyPositions = new ArrayList<Integer>();
 			playerThreeBodyPositions.add(3840);
 			playerThreeBodyPositions.add(3841);
 			playerThreeBodyPositions.add(3842);
 			int playerThreeSpeed = 750;
-			aReusableSnake = new model.Snake(playerThreeColor,
-					playerThreeDirection, playerThreeBodyPositions,
-					playerThreeSpeed);
+			aReusableSnake = new model.Snake(   playerThreeColor,
+                                                            playerThreeGamePad,
+                                                            playerThreeDirection, 
+                                                            playerThreeBodyPositions,
+                                                            playerThreeSpeed);
 			this.aListOfSnakes.add(aReusableSnake);
 
 		}
@@ -125,6 +140,8 @@ public class Game extends SnakeGame {
 			logger.info("Creating snake #4 of " + NumberOfSnakesToCreate);
 			// Create 4 snake objects, the 4 players are hard coded
 			int playerFourColor = controller.ConvertLedType.hexToInt("FF0000");
+                        //TODO: Player 4 is always hardcoded to controller 0, allow dnamic changing
+                        int playerFourGamePad = 3;
 			int playerFourDirection = 2; // Snake is traveling south
 			ArrayList<Integer> playerFourBodyPositions = new ArrayList<Integer>();
 			playerFourBodyPositions.add(3855);
@@ -132,9 +149,11 @@ public class Game extends SnakeGame {
 			playerFourBodyPositions.add(3346);
 			int playerFourSpeed = 750;
 
-			aReusableSnake = new model.Snake(playerFourColor,
-					playerFourDirection, playerFourBodyPositions,
-					playerFourSpeed);
+			aReusableSnake = new model.Snake(   playerFourColor,
+                                                            playerFourGamePad,
+                                                            playerFourDirection, 
+                                                            playerFourBodyPositions,
+                                                            playerFourSpeed);
 			this.aListOfSnakes.add(aReusableSnake);
 
 		}
