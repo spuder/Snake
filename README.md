@@ -15,4 +15,4 @@ Seekway Cube
 
 
 
-![Alt text](https://github.com/spudstud/Snake/blob/master/Screenshots/gui.png "Setup Screen")
+![Gui Window](https://raw.github.com/spudstud/Snake/blob/master/Screenshots/gui.png)
