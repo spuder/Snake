@@ -32,27 +32,27 @@ public class SnakeGame {
 	
 
 	public static void main(String[] args) {
-		/*
-		 * Create a hashmap with every type of cube we support
-		 * we can get the Adaptive Object by simply calling the 
-		 * hashmap.get with key "Adaptive". We can get a Hypno object
-		 * by calling the hashmap with key "Hypno". Since both classes
-		 * implement the SerialInterface we can then call .getSerialBaudrate
-		 * or any other method. This makes the code extremely modular
-		 * because we only need to change 1 string to completely alter
-		 * the type of cube we are using. It could even be changed on the fly
-		 * (not that you would ever need to).
-		 * 
-		 * Note** you will need to cast the object returned to a SerialInterface to 
-		 * implement the methods. 
-		 * 
-		 * Example
-		 * System.out.println("Baudrate is " + ( (SerialInterface) aListOfCubeTypes.get("Hypno")).getSerialBaudrate() ); 
-		 */
+                /*
+                 * Create a hashmap with every type of cube we support
+                 * we can get the Adaptive Object by simply calling the 
+                 * hashmap.get with key "Adaptive". We can get a Hypno object
+                 * by calling the hashmap with key "Hypno". Since both classes
+                 * implement the SerialInterface we can then call .getSerialBaudrate
+                 * or any other method. This makes the code extremely modular
+                 * because we only need to change 1 string to completely alter
+                 * the type of cube we are using. It could even be changed on the fly
+                 * (not that you would ever need to).
+                 * 
+                 * Note** you will need to cast the object returned to (SerialInterface) to 
+                 * implement the methods. 
+                 * 
+                 * Example
+                 * System.out.println("Baudrate is " + ( (SerialInterface) aListOfCubeTypes.get("Hypno")).getSerialBaudrate() ); 
+                 */
 		aListOfCubeTypes = new HashMap<String, Object>();
-		aListOfCubeTypes.put("Adaptive Cube",	new AdaptiveCube() 	);
-		aListOfCubeTypes.put("Hypno Cube", 	new HypnoCube() 	);
-		aListOfCubeTypes.put("Seekway Cube",  	new SeekwayCube() 	);
+		aListOfCubeTypes.put("Adaptive Cube",	new AdaptiveCube()  );
+		aListOfCubeTypes.put("Hypno Cube", 	new HypnoCube()     );
+		aListOfCubeTypes.put("Seekway Cube",  	new SeekwayCube()   );
 		
                 /*
                  * Create a Controllers Object
@@ -98,9 +98,9 @@ public class SnakeGame {
 		String purpleHex 	= "FF00FF";
 		
 		//Create a bunch of apples for testing
-		aGame.createApple( ConvertLedType.hexToInt( redHex ) );
-		aGame.createApple( ConvertLedType.hexToInt( blueHex ) );
-		aGame.createApple( ConvertLedType.hexToInt( greenHex ) );
+		aGame.createApple( ConvertLedType.hexToInt( redHex )    );
+		aGame.createApple( ConvertLedType.hexToInt( blueHex )   );
+		aGame.createApple( ConvertLedType.hexToInt( greenHex )  );
 		aGame.createApple( ConvertLedType.hexToInt( purpleHex ) );
 
 	
@@ -130,7 +130,7 @@ public class SnakeGame {
                         //Controller number
                         int controllerNumber =  Controllers.getEventSource().getIndex();
                         //Button number
-                        int buttonNumber     = Controllers.getEventControlIndex();
+                        int buttonNumber     =  Controllers.getEventControlIndex();
                         /*
                          * Pressing a button on an xBox controller slightly alters the analog values
                          * This causes multiple unwanted events on button push
