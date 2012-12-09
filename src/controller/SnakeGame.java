@@ -70,26 +70,19 @@ public class SnakeGame {
                 
                     
 		theGui = new view.SnakeGui();
-		
-		//This is not needed since it is set when the gui is created
-//		activeCubeType = "Adaptive Cube";
-
-//		String numberOfPlayers = "4";
-//		int numberOfPlayersToInt = Integer.parseInt(numberOfPlayers);
-//
-//		logger.info("Creating " + numberOfPlayers + " snakes");
-//		aGame.createSnakes(numberOfPlayersToInt);
-//
-//		logger.info("Creating " + numberOfPlayers + " apples");
-//		for (model.Snake aSnake : aGame.getaListOfSnakes()) {
-//			int snakeColor = aSnake.getColor();
-//			aGame.createApple(snakeColor);
-//			logger.debug("Creating Apple with color " + snakeColor);
-//
-//		}
-
+                
 	}// end main
 
+        /**
+         * Sets up prerequisites for the game including:
+         * Creating players
+         * Setting player colors
+         * 
+         * @param numberOfPlayers
+         * @param gameMode
+         * @param serialPort
+         * @param serialBaudRate 
+         */
 	public static void setupGame(	int numberOfPlayers, 
                                         int gameMode, 
                                         String serialPort, 
@@ -115,6 +108,7 @@ public class SnakeGame {
 	}
 
 	public static void startGame() {
+            
 		//Create a new Game object with the parameters specified by the user
 		logger.info("Unpausing game");
 		aGame.setGamePaused(false);
@@ -183,7 +177,7 @@ public class SnakeGame {
 								aGame.createApple(appleColor);	
 								
 								//No need to add the apple to the array since that is handled in the createApple method
-							}
+							}//end if apple check
 							
 						}//end for each apple loop
 
@@ -202,6 +196,12 @@ public class SnakeGame {
 				}//end checkTimeout
 				
 			}//end for each snake loop
+                        
+                        
+                        
+                        //TODO: Look at every snake and see if players are still alive
+                        
+                        
 			
 		}while (anyPlayerStillAlive == true);
                 
@@ -219,7 +219,7 @@ public class SnakeGame {
          /**
         * Converts the button number, to the game event
         * Example: Pressing button 3 on controller means player turns right
-        * This is pro propritary to xbox controllers and snake game
+        * This is pro proprietary to xbox controllers and snake game
         * 
         * @param controllerNumber The number of the controller, starts at 0
         * @param buttonNumber The button number on the controller usually 0 - 22
