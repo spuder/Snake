@@ -51,8 +51,8 @@ public class ConvertLedType extends GameEnvironment{
 		 * 
 		 */
 //		int ledsPerCube = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube();
-//		if (absoluteLedNumber < 0) 
-//			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
+		if (absoluteLedNumber < 0) 
+			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
 //		if (absoluteLedNumber > ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getLedsPerCube() ) 
 //			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + ledsPerCube + " received: " + absoluteLedNumber ); 
 //		
@@ -195,7 +195,8 @@ public class ConvertLedType extends GameEnvironment{
 		return Integer.parseInt(sixOrEightDigitHexString, 16);
 	}
 	
-	/**Takes the number of leds per x y z and returns how many leds are in the cube
+	/**
+         * Takes the number of leds per x y z and returns how many leds are in the cube
 	 * It basically does x*y*z however it can ignore a 0. 
 	 * 
 	 */

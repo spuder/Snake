@@ -67,13 +67,13 @@ public class SnakeTest {
 	public void testGetColor() {
 		// Create a snake, give it a color, and verify the return is the color
 		// expected
-		aSnake = new Snake("FFFFFF", 0, bodyPositions, 500);
+		aSnake = new Snake("FFFFFF",0, 0, bodyPositions, 500);
 		assertEquals("FFFFFF", aSnake.getColor());
 		// Clear out the object to free up ram and prepare for next test
 		aSnake = null;
 
 		// Make sure that 8 bit Hex is truncated to 6 bit hex
-		aSnake = new Snake("AAFFFFFF", 0, bodyPositions, 500);
+		aSnake = new Snake("AAFFFFFF",0, 0, bodyPositions, 500);
 		assertEquals("FFFFFF", aSnake.getColor());
 		// Clear out the object to free up ram and prepare for next test
 		aSnake = null;
@@ -84,7 +84,7 @@ public class SnakeTest {
 	public void setColorInt() {
 		// Set the snake color with an int, then verify it retrieved it
 		// This success depends on getColor working properly
-		aSnake = new Snake("FFFFFF", 0, bodyPositions, 500);
+		aSnake = new Snake("FFFFFF",0, 0, bodyPositions, 500);
 		aSnake.setColor(42);
 		assertEquals("2A", aSnake.getColor());
 		// Clear out the object to free up ram and prepare for next test
@@ -93,7 +93,7 @@ public class SnakeTest {
 
 	@Test
 	public void setLength() {
-		aSnake = new Snake("FFFFFF", 0, bodyPositions, 500);
+		aSnake = new Snake("FFFFFF",0, 0, bodyPositions, 500);
 		aSnake.setLength(5);
 		assertEquals(5, aSnake.getLength());
 	}
@@ -104,7 +104,7 @@ public class SnakeTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void setLengthTestException1() {
-		aSnake = new Snake("FFFFFF", 0, bodyPositions, 500);
+		aSnake = new Snake("FFFFFF",0, 0, bodyPositions, 500);
 		aSnake.setLength(-1);// This should throw an exception
 		// DONT ADD ANY OTHER TESTS TO THIS METHOD, MAKE A NEW ONE
 	}
@@ -115,7 +115,7 @@ public class SnakeTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void setLengthTestException2() {
-		aSnake = new Snake("FFFFFF", 0, bodyPositions, 500);
+		aSnake = new Snake("FFFFFF",0, 0, bodyPositions, 500);
 		aSnake.setLength(1000000000);// This should throw an exception
 		// DONT ADD ANY OTHER TESTS TO THIS METHOD, MAKE A NEW ONE
 	}
