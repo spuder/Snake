@@ -152,6 +152,8 @@ public class SnakeGame {
 
                                 //See if it is time to update the snake
 				if ( aGame.checkTimeout(atempSnake) == true ) {
+                                    
+                                        //Advance the snake forward
 					atempSnake.advanceForward();
 					System.out.println("Snake " + atempSnake.getColor() + " is now at " + atempSnake.getBodyPositions().get(0) ); 
 					System.out.println("");
@@ -159,7 +161,7 @@ public class SnakeGame {
 					logger.debug("Searching entire arrayList to see if snake has eaten apple");
 					if ( atempSnake.appleCheck( aGame.getaListOfApples() ) == true ) {
 						atempSnake.setScore(100);
-						logger.error("Added 100 points to snake " + atempSnake.getColor() );
+						logger.error(" *** Added 100 points to snake " + atempSnake.getColor() +" *****" );
 
 						//Find the apple, delete it and create a new one
 						for(model.Apple appleToDestroy : aGame.getaListOfApples() ) {
@@ -185,7 +187,17 @@ public class SnakeGame {
 							
 						}//end for each apple loop
 
+                                                
+                                                                                               
 					}//end if snake.applecheck == true
+                                        
+                                        if ( aGame.wasKilledInBodyCollision(atempSnake) == true ) {
+                                            logger.warn("Snake " + atempSnake.getColor() + " has tragically died by hitting another snake");
+                                            atempSnake.setAlive(false);
+                                        }//end if snake was killed in body collision
+                                                
+                                                
+                                                
 					
 				}//end checkTimeout
 				

@@ -293,14 +293,52 @@ public class Game extends SnakeGame {
 		}		
 	}
 
-	public void checkHasCollidedWithSnakeBody(Snake aSnake) {
+        /**
+         * Looks at every snake position and compares with one snake head position
+         * There will always be 1 collision where the snake compared is equal to itself
+         * If there is more than one collision, then the snake is killed
+         * 
+         * Returns true if snake has collided with other snake, and is dead
+         * @param aSnake 
+         */
+	public boolean wasKilledInBodyCollision(Snake aSnake) {
+            int numberOfCollisions = 0;
+            
+            //Create a variable to store the index of the head of the snake which is compared against all other snakes
+            final int snakeHeadPos = aSnake.getBodyPositions().indexOf(0);
+            logger.debug("looking at snake " + aSnake.getColor() + "/'s head at " + snakeHeadPos );
+               
 
-		// Iterates through all the bodies of all the snakes and sees it if it
-		// has gone inside (collided) with another snake
-		// If it has, then kill the snake, add to the logging level error
-		logger.error("Snake be dead");
-		// If it has not then add to the logging level debug
-		logger.debug("Snake not be dead");
+            // Iterates through all the bodies of all the snakes 
+            for (Snake aTempSnake : aListOfSnakes) {
+                
+               
+               //look at all the body parts of the other snake
+               for ( int bodyPart = 0; bodyPart < aTempSnake.getBodyPositions().size(); bodyPart++ ){
+                    //If the body part is equal, then increment the numberOfCollisions
+                    //There should always be 1 collsion, If there are 2 then the snake is dead
+                    if (snakeHeadPos == aTempSnake.getBodyPositions().get(bodyPart)) {
+                          logger.debug("Found a snake body part collision at " + snakeHeadPos);
+                          numberOfCollisions++;
+                    }
+               }//end for each body part
+               
+            }// end for each snake
+            
+
+            
+            if (numberOfCollisions >= 1 ) {
+                logger.warn("Snake " + aSnake.getColor() + " collided with another snake at " + snakeHeadPos + " and is dead");
+                return true;
+            }
+            else if (numberOfCollisions == 0) {
+                logger.debug("Snake "+ aSnake.getColor() + " did not collide with any other snakes");
+                return false;
+            }
+            else {
+                logger.fatal("Game.wasKilledInBodyCollision can only be 0, 1  or greater than 1, received " + numberOfCollisions);     
+                throw new IllegalStateException("Game.wasKilledInBodyCollision can only be 0 or greater than 1, received " + numberOfCollisions);
+            }
 
 	}
 
