@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import controller.ConvertLedType;
+import controller.GameEnvironment;
+import controller.SerialInterface;
 
 /**
  * Snake has a position, speed, length
@@ -241,9 +243,19 @@ public class Snake extends Game {
 	{
 		ArrayList<Integer> anArrayList = this.getBodyPositions();
 		int headPosition = anArrayList.get(0);
-		int headPositionX = controller.ConvertLedType.absoluteToXPositionInRow(headPosition);
-		int headPositionY = controller.ConvertLedType.absoluteToYPositionInPanel(headPosition);
-		int headPositionZ = controller.ConvertLedType.absoluteToZPositionInCube(headPosition);
+                
+                //Retrieve the active cube type from GameEnvironment class
+                String tempActiveCubeType = GameEnvironment.instance.activeCubeType;
+                //Save a temporary object containing the cube attribuetes
+                SerialInterface theInterface = (SerialInterface) GameEnvironment.aListOfCubeTypes.get(tempActiveCubeType);
+                //Get the cube attributes from the temporary object 
+                int xNumberOfLedsPerRow     = theInterface.getxNumberOfLeds();
+                int yNumberOfRowsPerPanel   = theInterface.getyNumberOfLeds();
+                int zNumberOfPanelsPerCube  = theInterface.getzNumberOfLeds();
+                        
+		int headPositionX = controller.ConvertLedType.absoluteToXPositionInRow(xNumberOfLedsPerRow, yNumberOfRowsPerPanel, zNumberOfPanelsPerCube, headPosition);
+		int headPositionY = controller.ConvertLedType.absoluteToYPositionInPanel(xNumberOfLedsPerRow, yNumberOfRowsPerPanel, zNumberOfPanelsPerCube, headPosition);
+		int headPositionZ = controller.ConvertLedType.absoluteToZPositionInCube(xNumberOfLedsPerRow, yNumberOfRowsPerPanel, zNumberOfPanelsPerCube, headPosition);
 		
 		/*
 		 * Travel Direction
@@ -296,7 +308,7 @@ public class Snake extends Game {
 		}
 			
 		//Save new position to array after we convert it back
-		anArrayList.add( 0, ConvertLedType.relativeToAbsolute( headPositionX, headPositionY, headPositionZ ));
+		anArrayList.add( 0, ConvertLedType.relativeToAbsolute(xNumberOfLedsPerRow, yNumberOfRowsPerPanel, zNumberOfPanelsPerCube,  headPositionX, headPositionY, headPositionZ ));
 		
 		logger.debug("Snake is now at "+ anArrayList.get(0));
 		

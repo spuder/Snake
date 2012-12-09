@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import controller.ConvertLedType;
 import controller.SerialInterface;
-import controller.SnakeGame;
+import controller.GameEnvironment;
 
 /**
  * Game is the working class that performs actions on snakes and apples
@@ -17,7 +17,7 @@ import controller.SnakeGame;
  * @author Spencer Owen
  * @version 1.0
  */
-public class Game extends SnakeGame {
+public class Game extends GameEnvironment {
 	public Logger logger = Logger.getLogger(this.getClass());
 
 	private int numberOfPlayers;
@@ -185,9 +185,13 @@ public class Game extends SnakeGame {
 
 		int temporaryAppleLocation;
 		int minumumLed = 0;
+                
+                String tempActiveCubeType = GameEnvironment.instance.activeCubeType;
+                SerialInterface atempCube = (SerialInterface) GameEnvironment.instance.aListOfCubeTypes.get(tempActiveCubeType);
 		// //Get the highest number in the Arena and generate a random number
 		// less than it
-		int maximumLed = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube() - 1;
+		int maximumLed = atempCube.getLedsPerCube() - 1;
+
 //		 logger.debug("Maximum led = " + maximumLed + ", Arena.xMaximum="+
 //		 CubeAttributes.xNumberOfLedsPerRow-1 +", Arena.yMaximum="+
 //		 Arena.yMaximum + ", Arena.zMaximum="+ Arena.zMaximum);

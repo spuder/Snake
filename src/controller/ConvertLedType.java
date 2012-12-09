@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import org.apache.log4j.Logger;
 
-public class ConvertLedType extends SnakeGame{
+public class ConvertLedType extends GameEnvironment{
 	//Create a new logger for this class
 	
 
@@ -24,7 +24,7 @@ public class ConvertLedType extends SnakeGame{
 	*/
 	
 	
-	public static int absoluteToXPositionInRow(int absoluteLedNumber)
+	public static int absoluteToXPositionInRow(int xNumberOfLedsPerRow, int yNumberOfRowsPerPanel, int zNumberOfPanelsPerCube, int absoluteLedNumber)
 	{
 		/**
 		 * Retrieves the absolute led number of the first led in the same row then subtracts this led number
@@ -32,12 +32,7 @@ public class ConvertLedType extends SnakeGame{
 		 */
 		if (absoluteLedNumber < 0) throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
 		
-		//TODO: Not sure what the purpose of getInstance() is?
-		//CubeAttributes.getInstance();
-		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
-		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
-		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
-		
+
 		int ledTotalRowNumber 		= (absoluteLedNumber / xNumberOfLedsPerRow); // 48 would return 3rd row TODO:Consider renaming locationInY
 	    int ledPanelNumber 			= (absoluteLedNumber / xNumberOfLedsPerRow / yNumberOfRowsPerPanel); //4095 would return panel 15, 300 returns panel 1 TODO:Consider renaming to locationINZ 
 	    int ledVerticalRowNumber 	= (ledTotalRowNumber - (yNumberOfRowsPerPanel * ledPanelNumber)); //we need to know how high from the ground, not how many rows there are total
@@ -48,22 +43,22 @@ public class ConvertLedType extends SnakeGame{
 	
 
 	
-	public static int absoluteToYPositionInPanel(int absoluteLedNumber)
+	public static int absoluteToYPositionInPanel(int xNumberOfLedsPerRow, int yNumberOfRowsPerPanel, int zNumberOfPanelsPerCube, int absoluteLedNumber)
 	{
 		/**
 		 * Takes an integer value representing the absolute location (eg. 4095) 
 		 * and returns the relative y coordinate [x,y,z]. Assumes origin is base 0 [0,0,0]
 		 * 
 		 */
-		int ledsPerCube = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube();
-		if (absoluteLedNumber < 0) 
-			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
-		if (absoluteLedNumber > ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getLedsPerCube() ) 
-			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + ledsPerCube + " received: " + absoluteLedNumber ); 
-		
-		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
-		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
-		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
+//		int ledsPerCube = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube();
+//		if (absoluteLedNumber < 0) 
+//			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
+//		if (absoluteLedNumber > ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getLedsPerCube() ) 
+//			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + ledsPerCube + " received: " + absoluteLedNumber ); 
+//		
+//		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
+//		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
+//		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
 		
 		int ledTotalRowNumber     = (absoluteLedNumber / xNumberOfLedsPerRow);
 		
@@ -77,18 +72,18 @@ public class ConvertLedType extends SnakeGame{
 		
 	}
 	
-	public static int absoluteToZPositionInCube(int absoluteLedNumber)
+	public static int absoluteToZPositionInCube(int xNumberOfLedsPerRow, int yNumberOfRowsPerPanel, int zNumberOfPanelsPerCube, int absoluteLedNumber)
 	{
-		int ledsPerCube = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube();
-		
-		if (absoluteLedNumber < 0) 
-			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
-		if (absoluteLedNumber > ledsPerCube) 
-			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + ledsPerCube + " received: " + absoluteLedNumber ); 
-		
-		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
-		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
-		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
+//		int ledsPerCube = ((SerialInterface) aListOfCubeTypes.get(activeCubeType)).getLedsPerCube();
+//		
+//		if (absoluteLedNumber < 0) 
+//			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + absoluteLedNumber);
+//		if (absoluteLedNumber > ledsPerCube) 
+//			throw new IllegalArgumentException("absoluteLedNumber must be less than the maximum number of leds. Max led is " + ledsPerCube + " received: " + absoluteLedNumber ); 
+//		
+//		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
+//		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
+//		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
 		
 		int ledTotalRowNumber     = (absoluteLedNumber / xNumberOfLedsPerRow);      
 		//4095 would return panel 15, 300 returns panel 1 TODO:Consider renaming to locationINZ 
@@ -111,19 +106,19 @@ public class ConvertLedType extends SnakeGame{
 	 * @return An integer value of the led number in the cube. Example (4095)
 	 * @see relativeToAbsolute[x,y,z]
 	 */
-	public static int relativeToAbsolute(int xPosition, int yPosition, int zPosition)
+	public static int relativeToAbsolute(int xNumberOfLedsPerRow, int yNumberOfRowsPerPanel, int zNumberOfPanelsPerCube, int xPosition, int yPosition, int zPosition)
 	{
-		if ( xPosition < 0 ) 
-			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + xPosition);
-		if ( yPosition < 0 ) 
-			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + yPosition);
-		if ( zPosition < 0 ) 
-			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + zPosition);
-		
-
-		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
-		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
-		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
+//		if ( xPosition < 0 ) 
+//			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + xPosition);
+//		if ( yPosition < 0 ) 
+//			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + yPosition);
+//		if ( zPosition < 0 ) 
+//			throw new IllegalArgumentException("absoluteLedNumber must be greater than 0, received: " + zPosition);
+//		
+//
+//		int xNumberOfLedsPerRow 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getxNumberOfLeds();
+//		int yNumberOfRowsPerPanel 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getyNumberOfLeds();
+//		int zNumberOfPanelsPerCube 	= ( (SerialInterface) aListOfCubeTypes.get(activeCubeType) ).getzNumberOfLeds();
 		
 		/*
 		 * This formula was provided by Thomas and Desmond Makkugi 
@@ -143,10 +138,10 @@ public class ConvertLedType extends SnakeGame{
 	 * @return An integer value of the led number in the cube. Example (4095)
 	 * @see relativeToAbsolute
 	 */
-	public static int relativeToAbsolute(int[] arrayOfLeds)
+	public static int relativeToAbsolute(int xNumberOfLedsPerRow, int yNumberOfRowsPerPanel, int zNumberOfPanelsPerCube, int[] arrayOfLeds)
 	{
 		
-		return relativeToAbsolute(arrayOfLeds[0], arrayOfLeds[1], arrayOfLeds[2]);
+		return relativeToAbsolute( xNumberOfLedsPerRow,  yNumberOfRowsPerPanel,  zNumberOfPanelsPerCube, arrayOfLeds[0], arrayOfLeds[1], arrayOfLeds[2]);
 		
 	}
 	

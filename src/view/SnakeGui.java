@@ -1,6 +1,7 @@
 package view;
 
 
+import controller.GameEnvironment;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
@@ -23,8 +24,8 @@ import javax.swing.border.TitledBorder;
 
 import org.apache.log4j.Logger;
 
-import controller.SerialInterface;
-import controller.SnakeGame;
+//import controller.SerialInterface;
+//import controller.GameEnvrionment;
 
 /**
  * SnakeGui has 1 JFrame and 3 JPanels so the user can set the game preferences
@@ -37,7 +38,7 @@ public class SnakeGui extends JFrame {
 	public Logger logger = Logger.getLogger(this.getClass() );
 	
 	//An object that implements the API, it can be an adaptive cube or seekway cube object
-	SerialInterface theCube;
+	controller.SerialInterface theCube;
 	
 	JPanel backgroundJPanel;
 	JPanel aSerialJPanel;
@@ -79,10 +80,10 @@ public class SnakeGui extends JFrame {
 	public SnakeGui() throws HeadlessException {
 
 		//Set the active cube type to Adaptive
-		controller.SnakeGame.activeCubeType = "Adaptive Cube"; //TODO: There must be a better way to do this with .toString. See line 20 lower
+		controller.GameEnvironment.instance.activeCubeType = "Adaptive Cube"; //TODO: There must be a better way to do this with .toString. See line 20 lower
 		
 		//Create an Object of any type
-		theCube =  (SerialInterface) controller.SnakeGame.aListOfCubeTypes.get( controller.SnakeGame.activeCubeType );
+		theCube =  (controller.SerialInterface) controller.GameEnvironment.instance.aListOfCubeTypes.get( controller.GameEnvironment.instance.activeCubeType );
 		
 		
 /* *******Background JPanel***************/
@@ -103,7 +104,7 @@ public class SnakeGui extends JFrame {
 //		aSerialJPanel.setBackground(Color.blue);
 		
 		//Look up every type of cube we have in the hashmap and add each to the combo box
-		cubeTypeComboBox 	= new JComboBox(controller.SnakeGame.aListOfCubeTypes.keySet().toArray() );
+		cubeTypeComboBox 	= new JComboBox(controller.GameEnvironment.aListOfCubeTypes.keySet().toArray() );
 		
 		//Set the default to always be the Adaptive Cube		  
 //		cubeTypeComboBox.setSelectedItem("Adaptive"); //TODO: There must be a better way with .toString. See line 20 up
@@ -219,17 +220,17 @@ public class SnakeGui extends JFrame {
 					logger.error("The user clicked to change the cube type to "+ (String) cubeTypeComboBox.getSelectedItem() );
 					
 					//Set the new cube type based on what the user selected
-					controller.SnakeGame.activeCubeType = (String) cubeTypeComboBox.getSelectedItem();
+					controller.GameEnvironment.instance.activeCubeType = (String) cubeTypeComboBox.getSelectedItem();
 					
 					//Get the x y and z for the new cube type
-					theCube =  (SerialInterface) controller.SnakeGame.aListOfCubeTypes.get(controller.SnakeGame.activeCubeType);
+					theCube =  (controller.SerialInterface) controller.GameEnvironment.instance.aListOfCubeTypes.get(controller.GameEnvironment.instance.activeCubeType);
 					
 					xLedsPerCubeField.setText("x = " + theCube.getxNumberOfLeds() +""); 
 					yLedsPerCubeField.setText("y = " + theCube.getyNumberOfLeds() +"");
 					zLedsPerCubeField.setText("z = " + theCube.getzNumberOfLeds() +"");
 					
 					baudRate.setText( theCube.getSerialBaudrate() +"");
-					logger.debug("The system recognizes *"+ controller.SnakeGame.activeCubeType + "* as the current cube type");
+					logger.debug("The system recognizes *"+ controller.GameEnvironment.instance.activeCubeType + "* as the current cube type");
 					
 				}});
 		
@@ -266,12 +267,12 @@ public class SnakeGui extends JFrame {
 				//Get Game Mode
 				//TODO: Implement game mode
 				
-				SnakeGame.setupGame(numberOfPlayers, 0, baudRate.getText(), theCube.getSerialBaudrate() );
+				GameEnvironment.instance.setupGame(numberOfPlayers, 0, baudRate.getText(), theCube.getSerialBaudrate() );
                                 
                                 
 				
 				//Set mode to unpaused
-				SnakeGame.startGame();
+				GameEnvironment.instance.startGame();
 				
 			}
 		});
