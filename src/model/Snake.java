@@ -319,7 +319,7 @@ public class Snake extends Game {
 		anArrayList = null;
 		
 		//Update the time the snake was moved
-			this.lastMoveTime = System.currentTimeMillis();
+		this.lastMoveTime = System.currentTimeMillis();
 		
 	}
 	

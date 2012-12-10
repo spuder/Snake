@@ -267,12 +267,12 @@ public class SnakeGui extends JFrame {
 				//Get Game Mode
 				//TODO: Implement game mode
 				
-				GameEnvironment.instance.setupGame(numberOfPlayers, 0, baudRate.getText(), theCube.getSerialBaudrate() );
+				GameEnvironment.setupGame(numberOfPlayers, 0, baudRate.getText(), theCube.getSerialBaudrate() );
                                 
                                 
 				
 				//Set mode to unpaused
-				GameEnvironment.instance.startGame();
+				GameEnvironment.startGame();
 				
 			}
 		});

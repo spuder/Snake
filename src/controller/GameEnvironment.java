@@ -39,7 +39,7 @@ public class GameEnvironment {
         
 	public static void main(String[] args) {
             
-             GameEnvironment theEnvironment = new GameEnvironment();
+//             GameEnvironment theEnvironment = new GameEnvironment();
                 /*
                  * Create a hashmap with every type of cube we support
                  * we can get the Adaptive Object by simply calling the 
@@ -77,7 +77,8 @@ public class GameEnvironment {
                 logger.warn("Found " + Controllers.getControllerCount() + " controllers on system");
                 
                     
-		theEnvironment.theGui = new view.SnakeGui();
+//		theEnvironment.theGui = new view.SnakeGui();
+                GameEnvironment.theGui = new view.SnakeGui();
                 
 	}// end main
 
@@ -166,7 +167,7 @@ public class GameEnvironment {
 						logger.error(" *** Added 100 points to snake " + atempSnake.getColor() +" *****" );
 
 						//Find the apple, delete it and create a new one
-						for(model.Apple appleToDestroy : aGame.getaListOfApples() ) {
+						for( model.Apple appleToDestroy : aGame.getaListOfApples() ) {
 							logger.debug("In for loop checking apple " + appleToDestroy.getColor() );
 							
 							//See if the current snake head location is the same as an apple location
