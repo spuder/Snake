@@ -6,7 +6,7 @@ A 3d Version of the 8 bit classic game "Snake" played inside an led cube
 * Up to 4 players use xBox controllers to navigate a 3d led cube
 * The goal is to get as many apples as possible
 
-Features a modluar design that allows any developer to add a plug in for their own led cube
+Features a modular design that allows any developer to add a plug in for their own led cube
 Currently Supported Cubes are:
 Adaptive Cube (www.allsparkcube.com)
 Hypno Cube
